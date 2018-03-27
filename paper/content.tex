@@ -1,0 +1,221 @@
+% status: 0
+% chapter: TBD
+
+\title{XGBoost}
+
+
+\author{Goutham Arra}
+\affiliation{%
+  \institution{Indiana University Bloomington}
+  \city{Bloomington}
+  \state{Indiana}
+  \postcode{47408}
+  \country{USA}
+}
+\email{garra@iu.edu}
+
+\author{Gregor von Laszewski}
+\affiliation{%
+  \institution{Indiana University}
+  \streetaddress{Smith Research Center}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{laszewski@gmail.com}
+
+
+% The default list of authors is too long for headers}
+%\renewcommand{\shortauthors}{G. v. Laszewski}
+
+
+\begin{abstract} 
+XGBoost stands for Extreme Gradient Boosting. XGBoost is an
+open source software library where you can  implement Gradient Boosting machine
+learning method. It was created by Tianqi Chen, now with contributions from many
+developers and part of a wider collection of open source libraries developed by
+Distributed Machine Learning Community(DMLC).
+\end{abstract}
+
+\keywords{hid-sp18-401, Machine Learning, Gradient Boosting}
+
+
+\maketitle
+
+
+\section{Introduction}  
+
+Before talking about XGBoost, it is best to give introduction to general
+gradient boosting method. Gradient Boosting is a machine learning technique used
+to build both regression and classification models. It is primarily used in
+building decision trees. But building gradient boosting models on huge datasets
+(that sometimes contain more than 500,000 observations) is computationally
+onerous, not so efficient. By the use of XGBoost, we can build  heavy gradient
+boosting models on large data sets and run them fastly with better performance.
+“The name xgboost, though, actually refers to the engineering goal to push the
+limit of computations resources for boosted tree algorithms. Which is the reason
+why many people use xgboost. “ - says Tianqi Chen, creator of XGBoost ~\cite
+{hid-sp18-401-XGBoost-MLmastery}. The description of XGBoost according to the
+software repository on github is “Scalable, Portable and Distributed Gradient
+Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more”.
+
+
+
+\section{How XGBoost Model Works}
+
+XGBoost model supports the features of scikit-learn (in python) and R
+implementations, like cross validation. fit methods etc. along with new
+additions like regularization.  Regularization is the key aspect of XGBoost that
+makes it one of the reasons to use especially in  lot of Kaggle competitions.
+XGBoost model is just like any ohter Gradient Boosting model, in that it
+optimizes a loss function  along with regularization term. Typical loss
+functions that one uses depend on the type of Machine Learning model that we are
+building. Some of them are :
+
+\item Root Mean Square error for Linear Regression problems. 
+\item Log loss for Binary Classification problems. 
+\item mLog loss for Multi Class Classification problems.
+
+XGBoost optimizes its parameters by using Gradient Descent Algorithm on the loss
+function. Three forms of gradient boosting are supported by XGBoost, which are:
+
+\item Gradient Boosting(regular)
+\item Stochastic Gradient Boosting
+\item Regularized Gradient Boosting 
+
+~\cite{hid-sp18-401-XGBoost-MLmastery}.
+
+
+\section{Interfaces}
+
+XGBoost supports various interfaces on your machine after you download and
+install the software. Here are a few of the main interfaces.
+
+\item Command Line Interface (CLI)  
+\item C++  
+\item Python interface along with built in model that you can import 
+from Scikit-Learn library   
+\item R interface along with built in model in the Caret pachage  
+\item Julia item Java and JVM languages like Scala and platforms like Hadoop
+
+~\cite{hid-sp18-401-XGBoost-MLmastery}.
+
+
+\section{System Features}
+
+Some of the system features that XGBoost supports are follows 
+
+\subsection{Parallelization}
+
+It has the ability to use all of your CPU cores, as well as GPU cores (if
+available) for model construction and training
+
+\subsection{Distributed Computing}
+
+It uses cluster of machines to train models with very large datasets (more than
+500,000) on frameworks like Apache Hadoop, Apache Spark, and Apache Flink.
+
+\subsection{Out of Core Computing}
+
+When we have a large datasets that dont fit into the computer memory, XGBoost
+has the capability to access the data  like from external harddrive or when
+memory is on a computer network and perform Computing on them.
+
+\subsection{Cache Optimization}  XGBoost has the ability of Cache Optimization
+of data structures and algorithm to make the best use of hardware.
+
+~\cite{hid-sp18-401-XGBoost-MLmastery}
+
+\section{Algorithm Features} 
+
+XGBoost was engineered with aim of best efficiency of compute time and memory
+resources. It is designed to make best use of available resources to train the
+model. Here are some of the key algorithm implementation features :
+
+\subsection{Sparse Aware} Automatic awareness and handling of missing values in
+the train data before building
+
+\subsection{Block Structure}
+Supports constructing decision trees in parallel therby optimizing compute time
+
+\subsection{Continued Training} We can further boost or train an already trained
+model on new data available to us.
+
+~\cite{hid-sp18-401-XGBoost-MLmastery}
+
+\section{Parameter Tuning} XGBoost has added advantage over regular Boosted
+models in the number of parameters to tune and more options to optimize your
+model The overall parameters are divided into three categories.
+
+\subsection{1.General Parameters}
+These define the overall functionality of XGBoost
+
+\subsubsection{booster[default - gbtree]}  You get to choose whether you want to
+tree based models(gbtree) or linear models(gblinear)
+
+\subsubsection{silent[default - 0]} A silent mode of 1 will stop display of any
+running messages, but it is generally advisable to keep silent mode of 0, to
+understand how your model is training and look for any errors.
+
+\subsubsection{nthread} As we know XGBoost supports parallel processing, with
+this parameter we can specify number of threads or cores tobe used
+simultaneously. If we donot specify any value all the cores will be used.
+
+\subsection{Booster Parameters} we will consider tree booster parameters because
+it always outperforms the linear booster.
+
+\subsubsection{eta[default = .3]} This is the learning rate to be used in
+stochastic gradient descent lose optimization technique boosting. This has the
+effect of making the model more robust by shrinking the weights on each training
+step.
+
+\subsubsection{min_child_weight[default = 1]} As we know a decision tree has
+weights assigned to all the child nodes (including leaf nodes) for all
+observations. This parameter defines minimum threshold for the sum of weights.
+This is very much useful to control overfitting of our boosted model  (Higher
+value implies more overfitting).
+
+\subsubsection{max_depth[default = 6]} This is simply the maximum depth of a
+decision tree, same as in normal gradient boosting algorithm. Also used to
+control overfitting. We tune this parameter by using cross validation.
+
+\subsubsection{max_leaf_nodes}
+This is the maximum number of terminal nodes or leafs in a decision tree.
+
+\subsubsection{gamma[default=0]} In a decision tree a node is split only if it
+results in decreased Entropy or increased Information Gain. Through this
+parameter  we can specify minimum threshold for this positive reduction in the
+loss function.
+
+\subsection{Learning Task Parameters} This parameters are related to
+optimization objective and the metric to be calculated at each training step.
+
+\subsubsection{objective[default = reg:linear]} Based on the type of machine
+learning model we are building, regression or classification(binary or multi
+class) we specify our objective or loss functions as reg:linear or
+binary:logistic or  multi:softmax respectively.
+
+\subsubsection{eval_metric[default according to objective} This is the metric
+that is optimized according to the loss function while doing cross validation on
+the train data. The default values are rmse for linear regression and  error for
+classification. We can also use area under curve(auc) for classification.
+
+~\cite{hid-sp18-401-XGBoost-AnalyticsVidhya} 
+
+\section{Conclusion} 
+
+ XGBoost is an advanced implementation of normal gradient boosting algorithm.
+Its advantages lie in features  such as regularization, parallel processing,
+high flexibility in parameter tuning, handling missing values, tree pruning,
+built-in cross validation etc,.
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
+
