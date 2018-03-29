@@ -59,16 +59,16 @@ Step 5: Change the hostname for each node
 
 Step 6: Install Docker on each node
 * Run the code below to install docker on each node
-  * for host in hostname; do 
   
-        ssh pi@$host curl -sSL https://get.docker.com | sh; done
+  	for host in hostname; do 
+            ssh pi@$host curl -sSL https://get.docker.com | sh; done
  
 Step 7: Creating the swarm
 
 * create swarm on a single node (this node will be a manager node) 
-	* ssh into the node and run this command 
+  * ssh into the node and run this command 
 
-sudo docker swarm init --advertise-addr “IP Address of the node”
+	sudo docker swarm init --advertise-addr "IP Address of the node"
 
 * The previous command's output (token) can be used to join other nodes to the 
   swarm as a worker or manager.
@@ -78,10 +78,12 @@ sudo docker swarm init --advertise-addr “IP Address of the node”
 
       sudo docker swarm join --token SWMTKN-abc...manager...xyz 
       
-“IP Address of the node” to join node as a manager
-	* Run 
+\TODO{There seems to be some issue with indentation or incomplet documentation from here on}
 
-sudo docker swarm join --token SWMTKN-abc...worker...xyz 
+`IP Address of the node` to join node as a manager
+ * Run 
+
+	sudo docker swarm join --token SWMTKN-abc...worker...xyz 
 
 `IP Address of the node` to join node as a worker
 * Finally, we can run sudo docker node ls command to check the status all the 
