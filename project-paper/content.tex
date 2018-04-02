@@ -1,0 +1,107 @@
+% status: 100
+% chapter: SciKit Learn Algorithm
+
+\title{ProjectProposal of REST Service Framework for Singular Value 
+Decomposition on MNIST Data}
+
+\author{Goutham Arra}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{garra@iu.edu}
+
+\author{Priyadarshini Vijjigiri}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47404}
+  \country{USA}}
+\email{pvijjigi@iu.edu}
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{G. v. Laszewski}
+
+
+\begin{abstract} 
+For tasks such as image classification, Speech denoising etc..
+Deep learning algorithms with complex  neural networks are being used as they
+have proven more accurate in the recent  times. However, one of the downsides to
+running deep learning algorithms is they can be computationally heavy and
+require huge memory to execute. The solution to  the above problem is performing
+Singular Value Decomposition on them.
+
+
+\end{abstract}
+
+\keywords{hidsp18401, hidsp18421, REST, Deep Learning, Neural Networks, 
+tensorflow, Singular Value Decomposition. 
+}
+
+
+\maketitle
+
+\section{Project Proposal}
+
+Tensorflow is an open source machine learning framework that runs in Python to 
+mainly implement Neural Network algorithms. 
+
+MNIST classification is a famous problem in the deep learning community, which
+is  nothing but classification of images into 10 categories of numbers from 0-9.
+These are images with hand-written numbers on them.
+
+MNIST data can be downloaded from the internet with direct tensorflow python
+commands in our program. It contains 55000 train images on which we first train 
+our neural network. The dataset also consists of 10,000 test images to test
+how well our model has fared on the test images.
+
+But running such an algorithm requires huge memory, usually GPU clusters are
+used. We want to be able to run this problem on compressed network, as much as
+using only  4 percent of the memory previously used. This can be done by
+perfoming Singular Value Decomposition on the weight matrices of original Neural
+Network.
+
+Singular Value Decomposition is a mathematical concept where a given matrix can
+be represented as product of three matrices, which are left orthogonal singular
+matrix, one diagonal matrix containing singular values and one right orthogonal
+singular matrix. With this kind of decomposition of weight matrices of our
+original neural network, we can compress the weight matrices, by using these
+three matrices and choosing only select singular values which are most
+important.
+
+By choosing the number of singular values that we want to consider, we can
+compress the neural network by compromising on the test accuracy. Through this
+project, we want to be able to have the option of choosing this number among the
+following  - 10, 20, 50, 100, 200. Lets call this number D. For each value of 
+D, we want to train the network with this compressed neural network and see 
+how well it is able to predict the test images.
+
+REST services will be implemented to perform Singular Value decomposition on 
+our Neural network accorging to our chosen choice of D and train the network,
+do feed forwarding of test images and display the accuracy.
+
+Rest APIs with D = 10, 20,50, 100, 200 will be created.
+
+~\cite{mnist}
+~\cite{svd}
+
+\section{Conclusion}
+
+Through this project, we shall be able to compress the network for MNIST deep 
+learning classification problem by applying Singular Value Decompositon on them
+according to our chosen number of singular values with the help of REST services 
+and APIs for each value of D.
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
+
