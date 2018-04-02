@@ -1,5 +1,5 @@
-% status: 0
-% chapter: TBD
+% status: -1
+% chapter: AI
 
 \title{XGBoost}
 
@@ -13,16 +13,6 @@
   \country{USA}
 }
 \email{garra@iu.edu}
-
-\author{Gregor von Laszewski}
-\affiliation{%
-  \institution{Indiana University}
-  \streetaddress{Smith Research Center}
-  \city{Bloomington} 
-  \state{IN} 
-  \postcode{47408}
-  \country{USA}}
-\email{laszewski@gmail.com}
 
 
 % The default list of authors is too long for headers}
@@ -72,18 +62,22 @@ optimizes a loss function  along with regularization term. Typical loss
 functions that one uses depend on the type of Machine Learning model that we are
 building. Some of them are :
 
+\begin{itemize}
 \item Root Mean Square error for Linear Regression problems. 
 \item Log loss for Binary Classification problems. 
 \item mLog loss for Multi Class Classification problems.
+\end{itemize}
 
 XGBoost optimizes its parameters by using Gradient Descent Algorithm on the loss
 function. Three forms of gradient boosting are supported by XGBoost, which are:
 
+\begin{itemize}
 \item Gradient Boosting(regular)
 \item Stochastic Gradient Boosting
 \item Regularized Gradient Boosting 
+\end{itemize}
 
-~\cite{hid-sp18-401-XGBoost-MLmastery}.
+\TODO{ CITE CAN NOT STAND ALONE~\cite{hid-sp18-401-XGBoost-MLmastery}.}
 
 
 \section{Interfaces}
@@ -91,14 +85,16 @@ function. Three forms of gradient boosting are supported by XGBoost, which are:
 XGBoost supports various interfaces on your machine after you download and
 install the software. Here are a few of the main interfaces.
 
+\begin{itemize}
 \item Command Line Interface (CLI)  
 \item C++  
 \item Python interface along with built in model that you can import 
 from Scikit-Learn library   
 \item R interface along with built in model in the Caret pachage  
 \item Julia item Java and JVM languages like Scala and platforms like Hadoop
+\end{itemize}
 
-~\cite{hid-sp18-401-XGBoost-MLmastery}.
+\TODO{CITE CAN NOT STAND ALONE~\cite{hid-sp18-401-XGBoost-MLmastery}.}
 
 
 \section{System Features}
@@ -169,17 +165,17 @@ stochastic gradient descent lose optimization technique boosting. This has the
 effect of making the model more robust by shrinking the weights on each training
 step.
 
-\subsubsection{min_child_weight[default = 1]} As we know a decision tree has
+\subsubsection{min\_child\_weight[default = 1]} As we know a decision tree has
 weights assigned to all the child nodes (including leaf nodes) for all
 observations. This parameter defines minimum threshold for the sum of weights.
 This is very much useful to control overfitting of our boosted model  (Higher
 value implies more overfitting).
 
-\subsubsection{max_depth[default = 6]} This is simply the maximum depth of a
+\subsubsection{max\_depth[default = 6]} This is simply the maximum depth of a
 decision tree, same as in normal gradient boosting algorithm. Also used to
 control overfitting. We tune this parameter by using cross validation.
 
-\subsubsection{max_leaf_nodes}
+\subsubsection{max\_leaf\_nodes}
 This is the maximum number of terminal nodes or leafs in a decision tree.
 
 \subsubsection{gamma[default=0]} In a decision tree a node is split only if it
@@ -195,7 +191,7 @@ learning model we are building, regression or classification(binary or multi
 class) we specify our objective or loss functions as reg:linear or
 binary:logistic or  multi:softmax respectively.
 
-\subsubsection{eval_metric[default according to objective} This is the metric
+\subsubsection{eval\_metric[default according to objective} This is the metric
 that is optimized according to the loss function while doing cross validation on
 the train data. The default values are rmse for linear regression and  error for
 classification. We can also use area under curve(auc) for classification.
