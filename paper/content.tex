@@ -107,7 +107,6 @@ from Scikit-Learn library
 \item Julia item Java and JVM languages like Scala and platforms like Hadoop
 \end{itemize}
 
-\TODO{CITE CAN NOT STAND ALONE~\cite{hid-sp18-401-XGBoost-MLmastery}.}
 
 
 \section{System Features}
@@ -130,93 +129,119 @@ When we have a large datasets that dont fit into the computer memory, XGBoost
 has the capability to access the data  like from external harddrive or when
 memory is on a computer network and perform Computing on them.
 
-\subsection{Cache Optimization}  XGBoost has the ability of Cache Optimization
-of data structures and algorithm to make the best use of hardware.
+\subsection{Cache Optimization}
 
-~\cite{hid-sp18-401-XGBoost-MLmastery}
+XGBoost has the ability of Cache Optimization of data structures and algorithm 
+to make the best use of hardware.
+
+
 
 \section{Algorithm Features} 
 
 XGBoost was engineered with aim of best efficiency of compute time and memory
 resources. It is designed to make best use of available resources to train the
-model. Here are some of the key algorithm implementation features :
+model ~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are some of the key algorithm 
+implementation features :
 
-\subsection{Sparse Aware} Automatic awareness and handling of missing values in
-the train data before building
+\subsection{Sparse Aware} 
+Automatic awareness and handling of missing values in the train data before building.
 
 \subsection{Block Structure}
 Supports constructing decision trees in parallel therby optimizing compute time
 
-\subsection{Continued Training} We can further boost or train an already trained
-model on new data available to us.
+\subsection{Continued Training} 
+We can further boost or train an already trained model on new data available to us.
 
-~\cite{hid-sp18-401-XGBoost-MLmastery}
 
-\section{Parameter Tuning} XGBoost has added advantage over regular Boosted
-models in the number of parameters to tune and more options to optimize your
-model The overall parameters are divided into three categories.
+
+\section{Parameter Tuning} 
+
+XGBoost has added advantage over regular Boostedmodels in the number of parameters 
+to tune and more options to optimize your model The overall parameters are divided 
+into three categories.
 
 \subsection{1.General Parameters}
+
 These define the overall functionality of XGBoost
 
-\subsubsection{booster[default - gbtree]}  You get to choose whether you want to
-tree based models(gbtree) or linear models(gblinear)
+\subsubsection{booster[default - gbtree]}  
 
-\subsubsection{silent[default - 0]} A silent mode of 1 will stop display of any
-running messages, but it is generally advisable to keep silent mode of 0, to
-understand how your model is training and look for any errors.
+You get to choose whether you want to implement tree based models(gbtree) or linear 
+models (gblinear).
 
-\subsubsection{nthread} As we know XGBoost supports parallel processing, with
-this parameter we can specify number of threads or cores tobe used
-simultaneously. If we donot specify any value all the cores will be used.
+\subsubsection{silent[default - 0]}
 
-\subsection{Booster Parameters} we will consider tree booster parameters because
-it always outperforms the linear booster.
+A silent mode of 1 will stop display of any running messages, but it is generally 
+advisable to keep silent mode of 0, to understand how your model is training and 
+look for any errors.
 
-\subsubsection{eta[default = .3]} This is the learning rate to be used in
-stochastic gradient descent lose optimization technique boosting. This has the
-effect of making the model more robust by shrinking the weights on each training
-step.
+\subsubsection{nthread} 
 
-\subsubsection{min\_child\_weight[default = 1]} As we know a decision tree has
-weights assigned to all the child nodes (including leaf nodes) for all
-observations. This parameter defines minimum threshold for the sum of weights.
-This is very much useful to control overfitting of our boosted model  (Higher
+As we know XGBoost supports parallel processing, with this parameter we can specify
+number of threads or cores tobe used simultaneously. If we donot specify any value 
+all the cores will be used.
+
+\subsection{Booster Parameters} 
+
+We will consider the following tree booster parameters because they always outperform 
+the linear booster.
+
+\subsubsection{eta[default = .3]} 
+
+This is the learning rate to be used in stochastic gradient descent lose optimization 
+technique boosting. This has the effect of making the model more robust by shrinking the 
+weights on each training step.
+
+\subsubsection{min\_child\_weight[default = 1]} 
+
+As we know a decision tree has weights assigned to all the child nodes (including leaf
+nodes) for all observations. This parameter defines minimum threshold for the sum of 
+weights.This is very much useful to control overfitting of our boosted model  (Higher 
 value implies more overfitting).
 
-\subsubsection{max\_depth[default = 6]} This is simply the maximum depth of a
-decision tree, same as in normal gradient boosting algorithm. Also used to
-control overfitting. We tune this parameter by using cross validation.
+\subsubsection{max\_depth[default = 6]} 
+
+This is simply the maximum depth of a decision tree, same as in normal gradient boosting 
+algorithm. Also used to control overfitting. We tune this parameter by using cross validation.
 
 \subsubsection{max\_leaf\_nodes}
+
 This is the maximum number of terminal nodes or leafs in a decision tree.
 
-\subsubsection{gamma[default=0]} In a decision tree a node is split only if it
-results in decreased Entropy or increased Information Gain. Through this
-parameter  we can specify minimum threshold for this positive reduction in the
-loss function.
+\subsubsection{gamma[default=0]} 
 
-\subsection{Learning Task Parameters} This parameters are related to
-optimization objective and the metric to be calculated at each training step.
+In a decision tree a node is split only if it results in decreased Entropy or increased 
+Information Gain. Through this parameter  we can specify minimum threshold for this positive 
+reduction in the loss function.
 
-\subsubsection{objective[default = reg:linear]} Based on the type of machine
-learning model we are building, regression or classification(binary or multi
-class) we specify our objective or loss functions as reg:linear or
+\subsection{Learning Task Parameters} 
+
+This parameters are related to optimization objective and the metric to be calculated at
+each training step.
+
+\subsubsection{objective[default = reg:linear]}
+
+Based on the type of machine learning model we are building, regression or classification
+(binary or multi class) we specify our objective or loss functions as reg:linear or
 binary:logistic or  multi:softmax respectively.
 
-\subsubsection{eval\_metric[default according to objective} This is the metric
-that is optimized according to the loss function while doing cross validation on
-the train data. The default values are rmse for linear regression and  error for
-classification. We can also use area under curve(auc) for classification.
+\subsubsection{eval\_metric[default according to objective}
 
-~\cite{hid-sp18-401-XGBoost-AnalyticsVidhya} 
+This is the metric that is optimized according to the loss function while doing cross 
+validation on the train data. The default values are rmse for linear regression and  error 
+for classification. We can also use area under curve(auc) for classification.
+
+ 
 
 \section{Conclusion} 
 
  XGBoost is an advanced implementation of normal gradient boosting algorithm.
 Its advantages lie in features  such as regularization, parallel processing,
 high flexibility in parameter tuning, handling missing values, tree pruning,
-built-in cross validation etc,.
+built-in cross validation etc, which is why it has become go-to Machine learning
+method for several Kaggle competitions. With the advent of XGBoost, other software
+implementations of Gradient Boosting are coming up for example, LightGBM (by 
+Microsoft).
 
 \begin{acks}
 
