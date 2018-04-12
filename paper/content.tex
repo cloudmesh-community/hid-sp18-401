@@ -238,7 +238,12 @@ aim of classifiying the decaying events of Higgs Boson particle into tau-tau dec
 background noise. The XGBoost made its debut in Higgs Boson Competition. At the beginning of 
 the competition, Tianqi,creator of XGBoost, introduced the tool along with a benchmark code, 
 which acheived top 10% already. Towards the end of the competition, it was the most used tools 
-by many.The training 
+by many.
+The training data consisits of 250000 events and test data consists of 550000 events, which is
+perfect for XGBoost to handle. Besides, giving good performance on the test data, the efficiency
+is also very high with XGBoost. Run time of the XGBoost model is 1/4th to that of the usual
+python sklearn model. With some feature engineering and parameter tuning, one can achieve around
+25th with a single XGBoost model.
 
 \section{Conclusion} 
 
