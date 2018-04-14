@@ -49,32 +49,61 @@ Learning Community(DMLC).
 \section{Introduction}  
 
 Before talking about XGBoost, it is best to give introduction to general
-gradient boosting method. Gradient Boosting is a machine learning technique used
-to build both regression and classification models. It is primarily used in
-building decision trees. But building gradient boosting models on huge datasets
-(that sometimes contain more than 500,000 observations) is computationally
-onerous, not so efficient. By the use of XGBoost, we can build  heavy gradient
-boosting models on large data sets and run them fastly with better performance.
-"The name xgboost, though, actually refers to the engineering goal to push the
-limit of computations resources for boosted tree algorithms. Which is the reason
-why many people use xgboost." - says Tianqi Chen, creator of XGBoost ~\cite
-{hid-sp18-401-XGBoost-MLmastery}. The description of XGBoost according to the
-software repository on github is "Scalable, Portable and Distributed Gradient
-Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more"
-~\cite{hid-sp18-401-XGBoost-Github}.
+gradient boosting method. Gradient Boosting is a machine learning technique
+used to build both regression and classification models that is primarily
+based on decision trees(it works on other type of models too). A decision tree
+is a type of mapping technique of the data or observations to the target
+variable based on a certain splitting criteria, that has yes or no answer,
+dividing input data into two groups, therby forming a tree.  Building only a
+single decision tree model on a large dataset, has been proven to be  unstable
+(has large variance) for making any prediction. This gave birth to a type of
+model building called ensemble models, which is stacking of decision trees
+together, forming an additive model of them that is much more powerful in
+reducing the overall variance. In simple words, an ensemble model is weighted
+aggregation of many simpler models, called decision stumps. Instead of
+stacking all the models together, Boosting improves model accuracy by
+optimizing  the hyperparemeters that are involved. One of such Boosting
+techniques is Gradient Boosting, which involves differentiation of the loss
+function, to find the optimum point, and then updating the  parameters
+accordingly, for a fixed number of iterations or until the loss converges
+below a threshold point.
 
+But building gradient boosting models on huge datasets (that sometimes contain 
+more than 500,000 observations) is computationally onerous, not so efficient.
+By the use of XGBoost, we can build  heavy gradient boosting models on large
+data sets and run them fastly with better performance. ``The name xgboost,
+though, actually refers to the engineering goal to push the limit of
+computations resources for boosted tree algorithms. Which is the reason why
+many people use xgboost.'' - says Tianqi Chen, creator of XGBoost ~\cite {hid-
+sp18-401-XGBoost-MLmastery}. The description of XGBoost according to the
+software repository on github is ``Scalable, Portable and Distributed Gradient
+Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and
+more'' ~\cite{hid-sp18-401-XGBoost-Github}.
 
 
 \section{How XGBoost Model Works}
 
+XGBoost model is just like any other Gradient Boosting model, in that it
+optimizes a loss function  along with regularization term. But it has its own
+implementation, with computations done on special kind of input format called
+DMatrix, along with a lot more customizable options for the model.
+ 
+For an ensemble model, which is a aggregation of a number of decision trees,
+there exists an objective function also called a loss function, that
+calculates the difference in score between predicted values with that of
+actual score. Objective function also includes a second term called
+Regularization that helps in preventing overfitting our model to the training
+data. Regularization is a key aspect of XGBoost, that makes our model more
+robust to increased variance. In XGBoost, we use gradient descent method to
+optimize our loss function or objective function. In this method, we
+differentiate our loss function with respect to predicted output (y-hat),
+which is the gradient, and improve this 'y-hat' along the direction of
+gradient to minimize the loss function in an iterative manner.
+
 XGBoost model supports the features of scikit-learn (in python) and R
 implementations, like cross validation. fit methods etc. along with new
-additions like regularization.  Regularization is the key aspect of XGBoost that
-makes it one of the reasons to use especially in  lot of Kaggle competitions.
-XGBoost model is just like any ohter Gradient Boosting model, in that it
-optimizes a loss function  along with regularization term. Typical loss
-functions that one uses depend on the type of Machine Learning model that we are
-building. Some of them are :
+additions like regularization.  Typical loss functions that one uses depend on
+the type of Machine Learning model that we are building. Some of them are :
 
 \begin{itemize}
 \item Root Mean Square error for Linear Regression problems. 
@@ -92,7 +121,40 @@ boosting  are supported by XGBoost, which are:
 \item Regularized Gradient Boosting 
 \end{itemize}
 
+\section{Evolution of XGBoost} 
 
+The creator of XGBoost, Tianqi Chen, is well versed in large-sccale machine
+learning and wanted to build scalable learning systems. XGBoost was one such
+project. It was created out of necessity. While Tianqi was doing research on
+variants of tree boosting, he did not find any existing Machine Learning
+method that satisfied the  combination of boosted trees and conditional random
+field. This gave birth to the first version of XGBoost, which was nothing but
+a configuration file. To use this model,  one has to use this config file,
+along with parameters and read the data for the model in LibSVM format. When
+Tianqi learned the popularity of XGBoost in the Higgs Boson ocmpetition, he
+along with his friend Bing Xu, to build a prototype XGBoost model with python
+wrapper, and later another one with R package. According to Tianqi, a machine
+learning model cannot be succesful alone with XGBoost. For a model to be good,
+all other things like data pre-processing, feauture engineering etc. had to be
+factored., which is why, "interfacing XGBoost with R and Python enables
+XGBoost to naturally work with language native data pipelines and become much
+more powerful~\cite{hid-sp18-401-XGBoost-evolution}." It also helps in easy
+customization and allows user to better use the model for better results. That
+is why, it did not take long for XGBoost to be integrated with scikit-learn
+package in Python package, which became more powerful, now that users can use
+grid search feature to optimize the hyperparameters of the model. Next thing
+left, is to make XGBoost more scalable on distrubuted systems. It was achieved
+by building a common Allreduce runtime called Rabit and use it as a bridge to
+port to different systems and  has edge over other machine learning models
+like for example, Support Vector Machines(SVM).
+See the below figure~\ref{f:XGBoost-on-different-platforms} for more
+understanding.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/XGBoost-on-different-platforms.png}
+  \caption{XGBoost Higgs Boson Competettion~\cite{hid-sp18-401-XGBoost-on-different-platforms-image}}
+\label{f:XGBoost-on-different-platforms}
+\end{figure}
 
 \section{Interfaces}
 
@@ -112,29 +174,31 @@ of the main interfaces.
 
 \section{System Features} 
 
-Some of the system features that XGBoost supports are follows 
+Some of the system features that XGBoost supports are follows: 
 
-\subsection{Parallelization}
+\begin{description}
+\item[Parallelization]
 
 It has the ability to use all of your CPU cores, as well as GPU cores (if
 available) for model construction and training
 
-\subsection{Distributed Computing}
+\item[Distributed Computing]
 
 It uses cluster of machines to train models with very large datasets (more than
 500,000) on frameworks like Apache Hadoop, Apache Spark, and Apache Flink.
 
-\subsection{Out of Core Computing}
+\item[Out of Core Computing]
 
 When we have a large datasets that dont fit into the computer memory, XGBoost
 has the capability to access the data  like from external harddrive or when
 memory is on a computer network and perform Computing on them.
 
-\subsection{Cache Optimization}
+\item[Cache Optimization]
 
 XGBoost has the ability of Cache Optimization of data structures and algorithm
 to make the best use of hardware.
 
+\end{description}
 
 
 \section{Algorithm Features} 
@@ -142,22 +206,26 @@ to make the best use of hardware.
 XGBoost was engineered with aim of best efficiency of compute time and memory
 resources. It is designed to make best use of available resources to train the
 model ~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are some of the key algorithm
-implementation features :
+implementation features:
 
-\subsection{Sparse Aware} 
+\begin{description}
+
+\item[Sparse Aware]
 
 Automatic awareness and handling of missing values in the train data before 
 building.
 
-\subsection{Block Structure}
+\item[Block Structure]
 
-Supports constructing decision trees in parallel therby optimizing compute time.
+Supports constructing decision trees in parallel therby optimizing compute
+time.
 
-\subsection{Continued Training} 
+\item[Continued Training] 
 
 Continued training implies, we can further boost or train an already trained
 model on new data available to us.
 
+\end{description}
 
 
 \section{Parameter Tuning} 
@@ -166,105 +234,173 @@ XGBoost has added advantage over regular Boostedmodels in the number of
 parameters  to tune and more options to optimize your model The overall
 parameters are divided  into three categories.
 
-\subsection{1. General Parameters}
+\subsection{General Parameters}
 
 These define the overall functionality of XGBoost
 
-\subsubsection{booster[default - gbtree]}  
+\begin{description}
+
+\item[booster[default - gbtree]]
 
 You get to choose whether you want to implement tree based models(gbtree) or
 linear  models (gblinear).
 
-\subsubsection{silent[default - 0]}
+\item[silent[default - 0]]
 
 A silent mode of 1 will stop display of any running messages, but it is
 generally  advisable to keep silent mode of 0, to understand how your model is
 training and  look for any errors.
 
-\subsubsection{nthread} 
+\item[nthread]
 
 As we know XGBoost supports parallel processing, with this parameter we can
 specify number of threads or cores tobe used simultaneously. If we donot specify
 any value  all the cores will be used.
 
-\subsection{2. Booster Parameters} 
+\end{description}
+
+\subsection{Booster Parameters} 
 
 We will consider the following tree booster parameters because they always
 outperform  the linear booster.
 
-\subsubsection{eta[default = .3]} 
+\begin{description}
+\item[eta[default = .3]]
 
 This is the learning rate to be used in stochastic gradient descent lose
 optimization  technique boosting. This has the effect of making the model more
 robust by shrinking the  weights on each training step.
 
-\subsubsection{min child weight[default = 1]} 
+\item[min child weight[default = 1]] 
 
 As we know a decision tree has weights assigned to all the child nodes
 (including leaf nodes) for all observations. This parameter defines minimum
 threshold for the sum of  weights.This is very much useful to control
 overfitting of our boosted model  (Higher  value implies more overfitting).
 
-\subsubsection{max depth[default = 6]} 
+\item[max depth[default = 6]]
 
 This is simply the maximum depth of a decision tree, same as in normal gradient
 boosting  algorithm. Also used to control overfitting. We tune this parameter by
 using cross validation.
 
-\subsubsection{max leaf nodes}
+\item[max leaf nodes]
 
 This is the maximum number of terminal nodes or leafs in a decision tree.
 
-\subsubsection{gamma[default=0]} 
+\item[gamma[default=0]]
 
 In a decision tree a node is split only if it results in decreased Entropy or
 increased  Information Gain. Through this parameter  we can specify minimum
 threshold for this positive  reduction in the loss function.
 
-\subsection{3. Learning Task Parameters} 
+\end{description}
+
+\subsection{Learning Task Parameters} 
 
 This parameters are related to optimization objective and the metric to be
 calculated at each training step.
 
-\subsubsection{objective[default = reg:linear]}
+\begin{description}
+
+\item[objective[default = reg:linear]]
 
 Based on the type of machine learning model we are building, regression or
 classification (binary or multi class) we specify our objective or loss
 functions as reg:linear or binary:logistic or  multi:softmax respectively.
 
-\subsubsection{eval metric[default according to objective}
+\item[eval metric[default according to objective]
 
 This is the metric that is optimized according to the loss function while doing
 cross  validation on the train data. The default values are rmse for linear
 regression and  error  for classification. We can also use area under curve(auc)
 for classification.
 
-\section{Case Study - Higgs Boson Competition}
+\end{description}
 
-Higgs Boson was a famous Kaggle Machine learning challenge in the year 2013,
+\section{Use Cases}
+
+\subsection{Higgs Boson Competition}
+
+Higgs Boson was a famous Kaggle Machine learning challenge in the year 2014,
 which has the  aim of classifiying the decaying events of Higgs Boson particle
 into tau-tau decay or simple  background noise. The XGBoost made its debut in
-Higgs Boson Competition. At the beginning of  the competition, Tianqi,creator of
-XGBoost, introduced the tool along with a benchmark code,  which acheived top 10
-percent already. Towards the end of the competition, it was the most used tools
-by many.
-The training data consisits of 250000 events and test data consists of
-550000 events, which is perfect for XGBoost to handle. Besides, giving good
-performance on the test data, the efficiency is also very high with XGBoost. Run
-time of the XGBoost model is 1/4th to that of the usual python sklearn model.
-With some feature engineering and parameter tuning, one can achieve around 25th
-with a single XGBoost model ~\cite{hid-sp18-401-XGBoost-pdf}.
+Higgs Boson Competition. At the beginning of  the competition, Tianqi,creator
+of XGBoost, introduced the tool along with a benchmark code,  which acheived
+top 10 percent already. Towards the end of the competition, it was the most
+used tool by many ~\cite{hid-sp18-401-Kaggle-Higgs-Boson}. 
+
+The challenge is to build a Classification model that will classify the test
+events into either tau-tau decay or background noise. Logistic Regression
+machine learning model is known for giving better results on binary
+classification tasks. But XGBoost outperformed all such models, and has gained
+a lot of popularity with this competition. The training data consisits of
+250000 events and test data consists of 550000 events, which is perfect for
+XGBoost to handle. There are some missing values in the dataset, which  have
+the value -999, but there is a special feature in XGBoost where you can
+mention the missing value format that considers them as missing data while
+reading input data into DMatrix. DMatrix is input format on which XGBoost
+performs computation tasks, which is the main reason for its efficiency, and
+computation speeds.
+
+The author and his team in the citation, had built their model based on single
+XGBoost instance, which achieved 11th on the leaderboard, which is more than
+impressive considering there were 1785 teams in total. They have built their
+model with decision trees of depth 6 levels, and 'binary:logitraw' as the
+objective function .Besides, giving good performance on the test data, the
+efficiency is also very high with XGBoost. Run time of the XGBoost model is
+1/4th to that of the usual python sklearn model. We can see the comparision in
+the figure~\ref{f:XGBoost-runtime-comparision}. With some basic feature
+engineering and minimal parameter tuning, one can achieve around 25th position
+on the leaderboard with a single XGBoost model ~\cite{hid-sp18-401 -XGBoost-
+pdf}.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Runtime-vs-Number-of-trees.png}
+  \caption{XGBoost Higgs Boson Competettion~\cite{hid-sp18-401-XGBoost-runtime-comparision-image}}
+\label{f:XGBoost-runtime-comparision}
+\end{figure}
+
+\subsection{Porto Seguro's Safe Driver Prediction Challenge} 
+
+This is Kaggle Machine learning challenge in the year 2017, that aims at
+reducing vehicle insurance for good drivers and increasing the same for bad
+drivers. Given some data about a particular driver, we should predict whether
+he will initiate an auto insurance claim for next year or not. By this, the
+Auto insurance companies  will have better understanding about their
+customoers, by fixing driver-specefic premiums, which is aimed at improving
+reputation for their company ~\cite{hid-sp18-401-Kaggle-Porto- Seguro}.
+
+This is a data heavy challenge, consisting of 595,212 train observations and
+892,816 test observations with 58 columns or features. Attempting to build a
+complex ensemble model and boosting it will be computationally infeasible and
+will not produce great results. The following testimony on the benefit of
+using XGBoost for this challenge comes from my own experience. Firstly, I had
+cleaned up my dataset, filling all the missing values and had done some one-
+hot encoding for categorical variables. Before knowing about XGBoost, as with
+any other binary classification problem, I have built my models based on
+Random Forest Regressor, another Machine learning technique on decision trees
+that works with the principle of Bagging. I have achieved a very low
+normalized gini coefficient of 0.26. With the help of feature importances of
+Random Forest Regressor, I have eliminated unimportant variables from my
+dataset. After reading many kernels from many teams, I have learned about the
+powerful tool, that is, XGBoost. I have thus built an ensemble model, based on
+XGBoost, on the modified dataset and had achieved a much improved gini
+coefficient of 0.29 on the test dataset. Also, running this boosted model on
+the huge data set took less time than other models that I have tried. This
+really proves, how XGBoost is not only a better model but also computationally
+efficient.
 
 \section{Conclusion} 
 
- XGBoost is an advanced implementation of normal gradient boosting algorithm 
- which is easy to use, efficient, has better accuracy and feasible. Its 
- advantages lie in features such as regularization, parallel processing, high 
- flexibility in parameter tuning, handling missing values, tree pruning, 
- built-in cross validation etc, which is why it has become go-to Machine 
- learning method for several Kaggle competitions. With the advent of XGBoost, 
- other software implementations of Gradient Boosting are coming up for example, 
- LightGBM (by Microsoft).
+XGBoost is an advanced implementation of normal gradient boosting algorithm
+which is easy to use, efficient, has better accuracy and feasible. Its
+advantages lie in features such as regularization, parallel processing, high
+flexibility in parameter tuning, handling missing values, tree pruning,
+built-in cross validation etc, which is why it has become go-to Machine
+learning method for several Kaggle competitions. With the advent of XGBoost,
+other software implementations of Gradient Boosting are coming up for example,
+LightGBM (by Microsoft).
 
 \begin{acks}
 
