@@ -27,12 +27,24 @@ all:
 	cp ../../hid-sample/paper/Makefile .
 	make -f Makefile generate
 
+<<<<<<< HEAD
 generate: clean iureport
+=======
+generate: clean iureport check log
+>>>>>>> ba5e3e9c1a3f88807cb7f9d8daa88c0736d89ca8
 	$(LATEX) ${FLAGS} ${FILE}
 	$(BIBTEX) ${FILE}
 	$(LATEX) ${FLAGS} ${FILE}
 	$(LATEX) ${FLAGS} ${FILE}
 
+<<<<<<< HEAD
+=======
+prepare:
+	cd ../../hid-sample; git pull
+	cp ../../hid-sample/paper/Makefile .
+	cp ../../hid-sample/paper/report.tex .
+
+>>>>>>> ba5e3e9c1a3f88807cb7f9d8daa88c0736d89ca8
 iureport:
 	cp ../../hid-sample/tex/format/iureport.cls .
 	cp ../../hid-sample/tex/format/ACM-Reference-Format.bst .
@@ -42,6 +54,16 @@ check:
 
 check-ta:
 	@python 	../../hid-sample/paper/check.py 
+
+log:
+	@echo '\\appendix' > check.tex
+	@echo '\\section{chktex}'>> check.tex
+	@echo '\\begin{tiny}'>> check.tex
+	@echo '\\begin{verbatim}'>> check.tex
+	@make check >> check.tex
+	@echo "\\end{verbatim}" >> check.tex
+	@echo '\\end{tiny}'>> check.tex
+	@echo "creating check.tex"
 
 bibtex:
 	@echo 
