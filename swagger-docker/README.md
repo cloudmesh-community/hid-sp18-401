@@ -6,7 +6,7 @@
 Here, I have implemented a cv object that will return cv mse error. The swagger code-gen generate the server stub code for us by taking the cv.yaml as input and gives us a foundation to develop the main logic. 
 
 ### Main logic : cv_stub.py 
-### Location - https://github.com/cloudmesh-community/hid-sp18-401/swagger-docker /log_stub.py
+### Location - https://github.com/cloudmesh-community/hid-sp18-401/swagger-docker /cv_stub.py
 
 You can download the code from the repository and test or enhance further.
 
