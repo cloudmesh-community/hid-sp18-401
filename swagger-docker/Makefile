@@ -51,7 +51,7 @@ service: dest
 	
 	rm *.jar
 	pip install --upgrade pip
-	pip install pandas numpy scikit-learn virtualenv
+	easy_install pandas numpy scikit-learn virtualenv
     
 	cp -r *.py $(DESTDIR)/swagger_server/controllers
 	cp cv.py $(DESTDIR)/swagger_server/models
