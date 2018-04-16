@@ -3,7 +3,7 @@ import six
 
 from swagger_server.models.cv import CV  # noqa: E501
 from swagger_server import util
-from cv import get_cross_validation_score
+from cv_stub import get_cross_validation_score
 
 def cv_get():  # noqa: E501
     """cv_get
