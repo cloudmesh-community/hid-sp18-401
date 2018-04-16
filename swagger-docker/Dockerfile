@@ -7,9 +7,10 @@ RUN apk add --update \
     build-base \
     git \
     openjdk7-jre \
-    pip install --upgrade pip \  
-    pip install pandas numpy scikit-learn virtualenv \
-    rm -rf /var/cache/apk/*
+
+ && pip install --upgrade pip \  
+ && pip install pandas numpy scikit-learn virtualenv \
+ && rm -rf /var/cache/apk/*
 
     
 
