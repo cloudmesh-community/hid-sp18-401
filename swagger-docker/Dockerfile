@@ -7,7 +7,7 @@ RUN apk add --update \
     build-base \
     git \
     openjdk7-jre \
-    libssl-dev -y \
+    libressl-dev \
  
  && rm -rf /var/cache/apk/*
 
