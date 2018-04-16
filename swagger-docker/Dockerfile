@@ -8,9 +8,8 @@ RUN apk add --update \
     git \
     openjdk7-jre \
 
- && pip install --upgrade pip \
- && pip install h5py \  
- && pip install -U pandas==0.19.0 numpy scikit-learn virtualenv \
+ && pip install --upgrade pip \  
+ && pip install -U pandas numpy scikit-learn virtualenv \
  && rm -rf /var/cache/apk/*
 
     
