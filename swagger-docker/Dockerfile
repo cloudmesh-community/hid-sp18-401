@@ -1,15 +1,19 @@
-FROM gliderlabs/alpine:3.3
+FROM ubuntu:16.04
+MAINTAINER Goutham Arra <garra@iu.edu>
 
-RUN apk add --update \
-    python \
+RUN apt-get update -q && apt-get install -qy \
+    build-essential \
     python-dev \
-    py-pip \
-    build-base \
-    git \
-    openjdk7-jre \
-    libressl-dev \
- 
- && rm -rf /var/cache/apk/*
+    python-pip \
+    git-core \
+    wget \
+    curl \
+    default-jre \
+    libssl-dev -y
+
+# install net tools
+RUN pip install --upgrade pip
+RUN pip install -U numpy scipy scikit-learn pandas
 
     
 
