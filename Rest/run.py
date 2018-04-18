@@ -1,4 +1,5 @@
 from eve import Eve
+from psutil import virtual_memory
 import platform
 import json
 import socket
@@ -28,7 +29,7 @@ def user():
 
 @app.route('/ram')
 def ram():
-    memory = Virtual_memory()
+    memory = virtual_memory()
     data = {
         'total': memory.total,
         'available': memory.available,
