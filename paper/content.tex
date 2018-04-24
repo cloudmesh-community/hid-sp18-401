@@ -68,17 +68,19 @@ function, to find the optimum point, and then updating the  parameters
 accordingly, for a fixed number of iterations or until the loss converges
 below a threshold point.
 
-But building gradient boosting models on huge datasets (that sometimes contain 
-more than 500,000 observations) is computationally onerous, not so efficient.
-By the use of XGBoost, we can build  heavy gradient boosting models on large
-data sets and run them fastly with better performance. ``The name xgboost,
-though, actually refers to the engineering goal to push the limit of
-computations resources for boosted tree algorithms. Which is the reason why
-many people use xgboost.'' - says Tianqi Chen, creator of XGBoost ~\cite {hid-
-sp18-401-XGBoost-MLmastery}. The description of XGBoost according to the
-software repository on github is ``Scalable, Portable and Distributed Gradient
-Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and
-more'' ~\cite{hid-sp18-401-XGBoost-Github}.
+But building gradient boosting models on huge datasets (that sometimes
+contain more than 500,000 observations) is computationally onerous,
+not so efficient.  By the use of XGBoost, we can build heavy gradient
+boosting models on large data sets and run them fastly with better
+performance. ``The name xgboost, though, actually refers to the
+engineering goal to push the limit of computations resources for
+boosted tree algorithms. Which is the reason why many people use
+xgboost.'' - says Tianqi Chen, creator of
+XGBoost~\cite{hid-sp18-401-XGBoost-MLmastery}. The description of
+XGBoost according to the software repository on github is ``Scalable,
+Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM)
+Library, for Python, R, Java, Scala, C++ and
+more''~\cite{hid-sp18-401-XGBoost-Github}.
 
 
 \section{How XGBoost Model Works}
@@ -112,7 +114,7 @@ the type of Machine Learning model that we are building. Some of them are :
 \end{itemize}
 
 XGBoost optimizes its parameters by using Gradient Descent Algorithm on the loss
-function ~\cite{hid-sp18-401-XGBoost-MLmastery}. Three forms of gradient
+function~\cite{hid-sp18-401-XGBoost-MLmastery}. Three forms of gradient
 boosting  are supported by XGBoost, which are:
 
 \begin{itemize}
@@ -136,9 +138,9 @@ along with his friend Bing Xu, to build a prototype XGBoost model with python
 wrapper, and later another one with R package. According to Tianqi, a machine
 learning model cannot be succesful alone with XGBoost. For a model to be good,
 all other things like data pre-processing, feauture engineering etc. had to be
-factored., which is why, "interfacing XGBoost with R and Python enables
+factored., which is why, ``interfacing XGBoost with R and Python enables
 XGBoost to naturally work with language native data pipelines and become much
-more powerful~\cite{hid-sp18-401-XGBoost-evolution}." It also helps in easy
+more powerful''~\cite{hid-sp18-401-XGBoost-evolution}. It also helps in easy
 customization and allows user to better use the model for better results. That
 is why, it did not take long for XGBoost to be integrated with scikit-learn
 package in Python package, which became more powerful, now that users can use
@@ -159,7 +161,7 @@ understanding.
 \section{Interfaces}
 
 XGBoost supports various interfaces on your machine after you download and
-install the software ~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are a few 
+install the software~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are a few 
 of the main interfaces.
 
 \begin{itemize}
@@ -205,7 +207,7 @@ to make the best use of hardware.
 
 XGBoost was engineered with aim of best efficiency of compute time and memory
 resources. It is designed to make best use of available resources to train the
-model ~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are some of the key algorithm
+model~\cite{hid-sp18-401-XGBoost-MLmastery}. Here are some of the key algorithm
 implementation features:
 
 \begin{description}
@@ -328,7 +330,7 @@ into tau-tau decay or simple  background noise. The XGBoost made its debut in
 Higgs Boson Competition. At the beginning of  the competition, Tianqi,creator
 of XGBoost, introduced the tool along with a benchmark code,  which acheived
 top 10 percent already. Towards the end of the competition, it was the most
-used tool by many ~\cite{hid-sp18-401-Kaggle-Higgs-Boson}. 
+used tool by many~\cite{hid-sp18-401-Kaggle-Higgs-Boson}. 
 
 The challenge is to build a Classification model that will classify the test
 events into either tau-tau decay or background noise. Logistic Regression
@@ -352,8 +354,7 @@ efficiency is also very high with XGBoost. Run time of the XGBoost model is
 1/4th to that of the usual python sklearn model. We can see the comparision in
 the figure~\ref{f:XGBoost-runtime-comparision}. With some basic feature
 engineering and minimal parameter tuning, one can achieve around 25th position
-on the leaderboard with a single XGBoost model ~\cite{hid-sp18-401 -XGBoost-
-pdf}.
+on the leaderboard with a single XGBoost model~\cite{hid-sp18-401-XGBoost-pdf}.
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Runtime-vs-Number-of-trees.png}
@@ -369,7 +370,7 @@ drivers. Given some data about a particular driver, we should predict whether
 he will initiate an auto insurance claim for next year or not. By this, the
 Auto insurance companies  will have better understanding about their
 customoers, by fixing driver-specefic premiums, which is aimed at improving
-reputation for their company ~\cite{hid-sp18-401-Kaggle-Porto- Seguro}.
+reputation for their company~\cite{hid-sp18-401-Kaggle-Porto-Seguro}.
 
 This is a data heavy challenge, consisting of 595,212 train observations and
 892,816 test observations with 58 columns or features. Attempting to build a
