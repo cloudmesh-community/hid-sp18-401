@@ -15,7 +15,6 @@ RUN apt-get update -q && apt-get install -qy \
 RUN pip install --upgrade pip
 RUN pip install -U numpy scipy scikit-learn pandas
 RUN pip install --upgrade tensorflow
-
     
 
 #RUN apt-get update -q && apt-get install -qy default-jre 
@@ -26,7 +25,7 @@ RUN pip install --upgrade tensorflow
 #RUN pip install pymongo
 RUN git clone https://github.com/cloudmesh-community/hid-sp18-401.git
 
-WORKDIR /hid-sp18-401/project-code/cloudmesh/SVD
+WORKDIR /hid-sp18-401/project-code/cloudmesh/svd
 
 #RUN wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 EXPOSE 8080

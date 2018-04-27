@@ -12,17 +12,17 @@ docker-all: docker-build docker-start
 
 docker-build:
 	@echo "building the image from docker file..."
-	docker build --no-cache -t svd/swagger-docker .
+	docker build --no-cache -t svd/docker .
 	@echo "image DONE"
 
 docker-pull:
 	@echo "pulling the image from dockerhub..."
-	docker pull svd/swagger-docker
+	docker pull svd/docker
 	@echo "image DONE"
 
 docker-start:
 	@echo "starting the service in container..."
-	docker run -p 8080:8080 svd/swagger-docker
+	docker run -p 8080:8080 svd/docker
 
 docker-stop:
 	@echo "stopping the service..."
@@ -31,7 +31,7 @@ docker-stop:
 
 docker-remove:
 	@echo "removing the image..."
-	docker rmi -f svd/swagger-docker
+	docker rmi -f svd/docker
 	@echo "image removed"
 
 docker-clean: docker-stop docker-remove
@@ -69,7 +69,7 @@ start:
 	cd $(DESTDIR) && python -m swagger_server 200
 
 test:
-	curl http://localhost:8080/svd/cv
+	curl http://localhost:8080/api/svd
             
 stop:
 	@echo "stopping the service"
