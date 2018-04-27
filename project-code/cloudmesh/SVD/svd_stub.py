@@ -155,7 +155,7 @@ svd_test_accuracy = accuracy_d.eval(feed_dict={x_d: mnist.test.images, y_d: mnis
 
 def svd_example():
        
-    ans = "The Original MNIST Network test accuracy is " + str(original_test_accuracy) +  " And Now after doing SVD on the original network with D value as " + str(D) + "  We get a test accuracy of "  + str(svd_test_accuracy) + " on the SVD Compressed network"
+    ans = " The value of D chosen is " + str(D) + ". The Original MNIST Network test accuracy is " + str(original_test_accuracy) +  " And Now after doing SVD on the original network with D value as " + str(D) + "  We get a test accuracy of "  + str(svd_test_accuracy) + " on the SVD Compressed network"
     return ans
 
 
