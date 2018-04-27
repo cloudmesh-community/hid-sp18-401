@@ -57,7 +57,7 @@ service: dest
 	#pip install -U numpy scipy scikit-learn pandas
     
 	cp -r *.py $(DESTDIR)/swagger_server/controllers
-	cp cv.py $(DESTDIR)/swagger_server/models
+	cp svd.py $(DESTDIR)/swagger_server/models
 	cp base_model_.py $(DESTDIR)/swagger_server/models
 	cd $(DESTDIR) && pip install -r requirements.txt && \
 	python setup.py install 
