@@ -66,7 +66,7 @@ service: dest
 
 start:  
 	@echo "starting the service..."
-	cd $(DESTDIR) && python -m swagger_server 200
+	cd $(DESTDIR) && python -m swagger_server SVDSIZE
 
 test:
 	curl http://localhost:8080/svd/cv
