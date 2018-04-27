@@ -2,7 +2,7 @@ SWAGGERCODEGEN=java -jar swagger-codegen-cli-2.3.1.jar
 YAMLFILE=svd.yaml
 DESTDIR=server/svd/flaskConnexion
 CREATED=server
-SVDSIZE=50
+#SVDSIZE=bash 
 
 all: service start 
 	@echo "DONE"
