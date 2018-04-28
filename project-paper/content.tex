@@ -57,7 +57,7 @@ image classification problem is one of the famous classification problems in the
 deep learning community. It is nothing but pattern recognition of images which
 have handwritten digits on them. The Aim of this problem is classification of
 images into ten categories of numbers from 0-9. Many say, MNIST classification
-problem is like 'Hello World !' type of problem in deep learning commnunity and
+problem is like 'Hello World!' type of problem in deep learning commnunity and
 yet it gives proper and perfect introduction to deep learning methods
 ~\cite{hid-sp18-401-mnist}.
 
@@ -68,7 +68,7 @@ method to this problem yields better results. This is done by building Neural
 Networks. Neural Network have come to become very powerful black boxes that are
 capable of imitating any non-linear function (of course linear too !) in the
 world. A typical Neural Network consists of several layers and each layer
-consists of several 'neurons'. Neurons are the fundamental building blocks of
+consists of several `neurons'. Neurons are the fundamental building blocks of
 neural network.  Each neuron-input path has an assiciated weight to it. It is
 similar to how important a certain neuron is in that layer. A neuron takes in as
 input a vector with a bias term added to that input vector and performs dot
@@ -80,15 +80,15 @@ neuron. This function takes in as input the above intermediate output of the dot
 product and depending on the function rules, gives out final output. More on
 this, is described later in detail.
 
-\subsection{What and Why Singular Value Decomposition ?}
+\subsection{What and Why Singular Value Decomposition?}
 
 Building neural networks for MNIST classification problem and using this
 network is a computationally heavy task. On a typical CPU, training the neural
-network and performing feed forward will take atleast 1 hour ! And we are not
+network and performing feed forward will take atleast 1 hour! And we are not
 even building Convolutional neural networks for analyzing the images, we are
 only building fully connected neural networks which are simpler to use. If
 only there were a way to compress this build neural network and use it without
-losing too much accuracy on predicting new images ! Indeed there is a solution
+losing too much accuracy on predicting new images! Indeed there is a solution
 to it, it is Singular Value Decomposition. Without giving too much away here,
 as the name hints, singular value decomposition technique compresses our
 original neural network by coming up with different representation of the
@@ -129,7 +129,7 @@ We are implementing Rest Service Framework with Swagger Codegen for this
 project. This Rest service when implemented, will connect to the server on MNIST
 database website, download the image data, construct the original full sized
 neural network, then apply Singular Value decomposition on it, optimize the
-compressed network for different values of size of SVD(D), output the test
+compressed network for different values of size of SVD (D), output the test
 accuracy of our down-sized network into a website.
 
 \section{Dataset Description for MNIST}
@@ -144,7 +144,7 @@ of United States Census Bureau. The MNIST database is hosted on  Yann Lecunn's
 website, Director of AI research, Facebook. Each image in MNIST dataset is a
 28x28 pixels, which is usually converted into 1 dimensional array of numbers
 to be used for model building. This results in a 784 dimensional vector per
-image ~\cite{hid-sp18-401-MNIST-dataset}.
+image~\cite{hid-sp18-401-MNIST-dataset}.
 
 Each image in MNIST data set is of 784 dimensions. It was a challenge to build a
 model on large number of dimensions. Many dimensional redcution techniques were
@@ -154,18 +154,19 @@ discovery of using more layers with in the neural network this is achievable
 with an accuracy of 98 percent. So we have used Deep Learning techniques in this
 Paper to build a model as REST service.
 
-Here are the typical image of the MNIST dataset.
+Figure~\ref{f:MNIST-digits-small} and Figure~\ref{f:MNIST-digit} are the typical 
+images of the MNIST dataset.
 
 \begin{figure}[!ht]
         \centering\includegraphics[width=\columnwidth]
         {images/mnist-digits-small.png}
-        \caption{Hand written numbers in MNIST Dataset}\label{s:MNIST-digits-small}
+        \caption{Hand written numbers in MNIST Dataset}\label{f:MNIST-digits-small}
 \end{figure}
 
 \begin{figure}[!ht]
         \centering\includegraphics[width=\columnwidth]
         {images/mnist-digit-big.png}
-        \caption{Hand written number in MNIST Dataset}\label{s:MNIST-digit}
+        \caption{Hand written number in MNIST Dataset}\label{f:MNIST-digit}
 \end{figure}
 
 \section{Singular Value Decomposition}
@@ -194,12 +195,12 @@ dimensional space and k dimensional space.
 Singular value Decomposition is applied to reduce the dimensions in many
 algorithms. One such traditional use is Principle Component analysis where any
 number of points in d dimensional space are reduced to k dimensional space where
-k is much less than d ~\cite{hid-sp18-401-svd}.
+k is much less than d~\cite{hid-sp18-401-svd}.
 
 \section{Neural Net Model for MNIST}
 
 Each image in MNIST data set is of 784 dimensions. It was a challenge to build
-a model on large number of dimensions. This problem is commonly called as 'The
+a model on large number of dimensions. This problem is commonly called as `The
 curse of dimensionality', because although many dimensions means more features
 about the image (which implies more data to build the model), it also means
 the network will become computationally heavy. Many dimensional redcution
@@ -251,14 +252,13 @@ of a neural network can approximate any complex function.
 
 \end{itemize}
 
-
-The following figure is for reference only, and is not the exact architechture
-that applies for this project
+Figure~\ref{f:Deep Neural Network} is for reference only, and is not the exact 
+architechture that applies for this project
 
 \begin{figure}[!ht]
         \centering\includegraphics[width=\columnwidth]
         {images/neural-network.jpeg}
-        \caption{Deep Neural Network}\label{s:Deep Neural Network}
+        \caption{Deep Neural Network}\label{f:Deep Neural Network}
 \end{figure}
 
 
@@ -275,7 +275,7 @@ Activation function are applied to each neuron, they decide whether the
 information neuron recieving should be activated or not. Without an activation
 function a neural network simply does a linear transformation so it is similar
 to linear regression model. Activation functions are important to neural
-network to develop non-linearity in the approximated function . A sufficiently
+network to develop non-linearity in the approximated function. A sufficiently
 large network using any of the common non linear activation function can
 approximate arbitrarily complex functions. Activaton function also have
 limitaions like they should be able to differentiable in order to propogate
@@ -293,14 +293,16 @@ ReLu function (Rectified Linear Function) gives output zero if input is
 negative and raw output otherwise.
 
 \begin{align*}
-f(x)&= max(x,0)
+f(x)&= \max(x,0)
 \end{align*}
 
 \begin{figure}[!ht]
         \centering\includegraphics[width=\columnwidth]
         {images/relu-activation-function.jpeg}
-        \caption{ReLU Activation Function}\label{s:ReLU-function}
+        \caption{ReLU Activation Function}\label{f:ReLU-function}
 \end{figure}
+
+Figure~\ref{f:ReLU-function} shows ReLU Activation function.
 
 Output of ReLU function is maximum of zero and itself. Gradient of this function
 is a constant value. So ReLU function overcomes the issue of Vanishing Gradient
@@ -324,8 +326,10 @@ S(x)&=\frac{e^{x}}{1+e^{x}}
 \begin{figure}[!ht]
         \centering\includegraphics[width=\columnwidth]
         {images/sigmoid-activation-function.jpeg}
-        \caption{Sigmoid Activation Function}\label{s:Sigmoid-function}
+        \caption{Sigmoid Activation Function}\label{f:Sigmoid-function}
 \end{figure}
+
+Figure~\ref{f:Sigmoid-function} explains Sigmoid Function.
 
 Sigmoid function has a characteristic S-shaped curve or sigmoid curve. Some of
 the function characteristics are, it is bounded, differentiable, and it is
@@ -347,7 +351,7 @@ knowledge of a neural network lies in its weight matrices. Neural networks
 train by a method called Back Propagation.  Back Propagation is simply
 propagation of errors back from output layer till input layer. Errors are the
 difference between groud truth value and predicted value. In our case, value
-is the class of the image, which number(0-9) does a given image belongs to ?
+is the class of the image, which number (0-9) does a given image belongs to ?
 During back propagation, we do not literally propagate this error, instead we
 try to minimize this error. So naturally, we differentiate this error
 function, to get the slpe and direction of gradient descent of error function.
@@ -392,12 +396,12 @@ fastly.
 
 \begin{itemize}
 
- \item Learning rate  : 0.001
- \item Minibatch size : 256
- \item Loss Function. : Softmax Cross Entropy
- \item Optimizer      : Adam Optimizer
- \item No of Epochs   : 1000
- \item Test Accuracy  : 97 percent
+ \item Learning rate: 0.001
+ \item Minibatch size: 256
+ \item Loss Function: Softmax Cross Entropy
+ \item Optimizer: Adam Optimizer
+ \item No of Epochs: 1000
+ \item Test Accuracy: 97 percent
 
 \end{itemize}
 
@@ -412,9 +416,9 @@ multiplications and additions.   In order to compress the network Singular Value
 Decomposition is applied on all the weight matrices. SVD reduces the rank of the
 resultant representation of the original weight matrices. Applying Singular
 Value Decompostion on the weight matrix with shape (n,m) gives 3 singular
-matrices they are left singular matrix(U), right singular matrix(V) and a
-Diagonal matrix with a singular values that is Singular Value Matrix(S) with
-shapes (n,D),(D,D),(D,m),  where D is the maximum of n and m. Values in Singular
+matrices they are left singular matrix (U), right singular matrix (V) and a
+Diagonal matrix with a singular values that is Singular Value Matrix (S) with
+shapes (n,D), (D,D), (D,m),  where D is the maximum of n and m. Values in Singular
 matrix are sorted in the order of their contribution to the approximation. So it
 means based on the approximation and complexity trade off, the  least important
 singular values can be discarded.
@@ -457,10 +461,9 @@ DELETE can be used to implement a REST service~\cite{hid-sp18-401-Rest-Service}.
 
 \subsection{Swagger}
 
-'Swagger is the worlds largest framework of API developer tools for the OpenAPI
- Specefications(OAS), ending development across entire API lifecycle, from
- design and documentation, to test and deployement'
- ~\cite{hid-sp18-401-Swagger-Service}.
+`Swagger is the worlds largest framework of API developer tools for the OpenAPI
+ Specefications (OAS), ending development across entire API lifecycle, from
+ design and documentation, to test and deployement'~\cite{hid-sp18-401-Swagger-Service}.
 
  Major swagger tools are 
 
@@ -499,12 +502,12 @@ directory, with python2 compatibility.
 Next we find under the flaskConnexion directory, swagger\_server directory, which
 has folders for models and controllers, which is where conroller code resides.
 Now, we define the exact service that we want to implement in the
-default\_controller.py file . To make things more simple, we have defined my
+default\_controller.py file. To make things more simple, we have defined my
 stub\_code in a different python file, svd\_stub.py and then we linked this file
 to the default\_controller.py file.
 
 So our entire implementation of this project is in svd\_stub file, and the
-function svd\_example() returns a string, which has entire information of the
+function svd\_example () returns a string, which has entire information of the
 result for this project, different values of size of SVD considered (D), initial
 test accuracy of the MNIST network, final test accuracy of SVD compressed
 network for each value of D.
@@ -526,13 +529,12 @@ pandas, scipy, scikit-learn and tensorflow.
 We have made our entire project capable of running anywhere in cloud, on any
 platform by creating container image and dockerizing it.
 
-'A Docker is the company driving the container movement and the only container
- platform to address every application across the hybrid cloud'
- ~\cite{hid-sp18-401-Docker}.
+`A Docker is the company driving the container movement and the only container
+ platform to address every application across the hybrid cloud'~\cite{hid-sp18-401-Docker}.
 
 'A container image is a lightweight, stand-alone, executable package of a piece
  of software that includes everything related to run it: code, runtime, system
- tools, system libraries, settings' ~\cite{hid-sp18-401-Container}.
+ tools, system libraries, settings'~\cite{hid-sp18-401-Container}.
 
 We have used official docker image for Ubuntu for our docker. We have also
 installed necessary tools, packages required for the entire project, including
