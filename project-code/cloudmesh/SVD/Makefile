@@ -12,7 +12,7 @@ docker-all: docker-build docker-start
 
 docker-build:
 	@echo "building the image from docker file..."
-	docker build --no-cache -t svd/docker .
+	docker build -t svd/docker .
 	@echo "image DONE"
 
 docker-pull:
