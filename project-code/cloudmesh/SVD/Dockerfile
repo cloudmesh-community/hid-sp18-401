@@ -15,6 +15,7 @@ RUN apt-get update -q && apt-get install -qy \
 RUN pip install --upgrade pip
 RUN pip install -U numpy scipy scikit-learn pandas
 RUN pip install --upgrade tensorflow
+
     
 
 #RUN apt-get update -q && apt-get install -qy default-jre 

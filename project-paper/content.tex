@@ -58,7 +58,8 @@ deep learning community. It is nothing but pattern recognition of images which
 have handwritten digits on them. The Aim of this problem is classification of
 images into ten categories of numbers from 0-9. Many say, MNIST classification
 problem is like 'Hello World !' type of problem in deep learning commnunity and
-yet it gives proper and perfect introduction to deep learning methods.
+yet it gives proper and perfect introduction to deep learning methods
+~\cite{hid-sp18-401-mnist}.
 
 \subsection{Need for Deep Learning}
 
@@ -143,7 +144,7 @@ of United States Census Bureau. The MNIST database is hosted on  Yann Lecunn's
 website, Director of AI research, Facebook. Each image in MNIST dataset is a
 28x28 pixels, which is usually converted into 1 dimensional array of numbers
 to be used for model building. This results in a 784 dimensional vector per
-image.
+image ~\cite{hid-sp18-401-MNIST-dataset}.
 
 Each image in MNIST data set is of 784 dimensions. It was a challenge to build a
 model on large number of dimensions. Many dimensional redcution techniques were
@@ -197,7 +198,7 @@ dimensional space and k dimensional space.
 Singular value Decomposition is applied to reduce the dimensions in many
 algorithms. One such traditional use is Principle Component analysis where any
 number of points in d dimensional space are reduced to k dimensional space where
-k is much less than d.
+k is much less than d ~\cite{hid-sp18-401-svd}.
 
 \section{Neural Net Model for MNIST}
 
@@ -457,14 +458,15 @@ based on stateless, client-server, cacheable communications protocol. REST is
 not based on HTTP, although it is used in most cases. In such cases, RESTful
 applications use HTTP requests to post data therby create/update resources, read
 data or resources, delete data or resources. Methods such as GET, PUSH, POST and
-DELETE can be used to implement a REST service.
+DELETE can be used to implement a REST service~\cite{hid-sp18-401-Rest-Service}.
 
 
 \subsection{Swagger}
 
 'Swagger is the worlds largest framework of API developer tools for the OpenAPI
  Specefications(OAS), ending development across entire API lifecycle, from
- design and documentation, to test and deployement'.
+ design and documentation, to test and deployement'
+ ~\cite{hid-sp18-401-Swagger-Service}.
 
  Major swagger tools are 
 
@@ -531,17 +533,18 @@ We have made our entire project capable of running anywhere in cloud, on any
 platform by creating container image and dockerizing it.
 
 'A Docker is the company driving the container movement and the only container
- platform to address every application across the hybrid cloud.'
+ platform to address every application across the hybrid cloud'
+ ~\cite{hid-sp18-401-Docker}.
 
 'A container image is a lightweight, stand-alone, executable package of a piece
  of software that includes everything related to run it: code, runtime, system
- tools, system libraries, settings.'
+ tools, system libraries, settings' ~\cite{hid-sp18-401-Container}.
 
 We have used official docker image for Ubuntu for our docker. We have also
 installed necessary tools, packages required for the entire project, including
 tools required for Rest service with Swagger.
 
-\section{Results and Conclusion}
+\section{Conclusion}
 
 In summary, we had succesfully built a REST service framework that connects to
 MNIST database, downloads image data, builds a full sized Neural Net,
