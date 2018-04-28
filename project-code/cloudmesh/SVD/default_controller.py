@@ -3,7 +3,7 @@ import six
 
 from swagger_server.models.svd import SVD  # noqa: E501
 from swagger_server import util
-from svd_stub import svd_example
+from svd_stub import svd_main
 
 def svd_get():  # noqa: E501
     """svd_get
@@ -13,4 +13,4 @@ def svd_get():  # noqa: E501
 
     :rtype: SVD
     """
-    return SVD(svd_example())
+    return SVD(svd_main())

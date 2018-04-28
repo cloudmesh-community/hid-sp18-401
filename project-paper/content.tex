@@ -1,15 +1,16 @@
-% status: 100
+% status: 50
 % chapter: TBD
 
 \title{REST Service Framework for Singular Value Decomposition on MNIST Image Classification Problem}
 
-\author{Goutham Arra}
+
+\author{Goutham Srivatsav Arra}
 \affiliation{%
   \institution{Indiana University}
   \city{Bloomington} 
   \state{IN} 
   \postcode{47408}
-  \country{USA}}
+}
 \email{garra@iu.edu}
 
 \author{Priyadarshini Vijjigiri}
@@ -17,8 +18,7 @@
   \institution{Indiana University}
   \city{Bloomington} 
   \state{IN} 
-  \postcode{47404}
-  \country{USA}}
+  \postcode{47408}}
 \email{pvijjigi@iu.edu}
 
 % The default list of authors is too long for headers}
@@ -26,73 +26,543 @@
 
 
 \begin{abstract} 
-For tasks such as image classification, Speech denoising etc..
-Deep learning algorithms with complex  neural networks are being used as they
-have proven more accurate in the recent  times. However, one of the downsides to
-running deep learning algorithms is they can be computationally heavy and
-require huge memory to execute. The solution to  the above problem is performing
-Singular Value Decomposition on them.
 
+For tasks such as image classification, Speech denoising etc.. Deep learning
+algorithms with complex  neural networks are being used as they have proven
+more accurate and capable in the recent times. However, one of the downsides
+to running deep learning algorithms is they can be computationally heavy and
+require huge memory to execute. The solution to  the above problem is
+performing Singular Value Decomposition on them. In this project we have built
+a dockerized swagger webservice  that trains a fully connected neural network
+for MNIST image classification problem and applies singular value
+decomposition according to size of SVD and optimize the network again. Entire
+Model and singular value decomposition is done in  python using Tensorflow.
 
-\end{abstract}
+ \end{abstract}
 
-\keywords{hid-sp18-401, hid-sp18-421, REST, Deep Learning, Neural Networks, 
-tensorflow, Singular Value Decomposition. 
-}
+\keywords{hid-sp18-401,hid-sp18-421, Singular Value Decomposition, Swagger,
+Docker, Deep Learning, Neural Networks, Tensorflow}
 
 
 \maketitle
 
-\section{Project Proposal}
 
-Tensorflow is an open source machine learning framework that runs in Python to 
-mainly implement Neural Network algorithms. 
 
-MNIST classification is a famous problem in the deep learning community, which
-is  nothing but classification of images into 10 categories of numbers from 0-9.
-These are images with hand-written numbers on them.
+\section{Introduction}
 
-MNIST data can be downloaded from the internet with direct tensorflow python
-commands in our program. It contains 55000 train images on which we first train 
-our neural network. The dataset also consists of 10,000 test images to test
-how well our model has fared on the test images.
+\subsection{MNIST Image Classification}
 
-But running such an algorithm requires huge memory, usually GPU clusters are
-used. We want to be able to run this problem on compressed network, as much as
-using only  4 percent of the memory previously used. This can be done by
-perfoming Singular Value Decomposition on the weight matrices of original Neural
-Network.
+MNIST stands for Mixed National Institute of Standards and Technology. MNIST
+image classification problem is one of the famous classification problems in the
+deep learning community. It is nothing but pattern recognition of images which
+have handwritten digits on them. The Aim of this problem is classification of
+images into ten categories of numbers from 0-9. Many say, MNIST classification
+problem is like 'Hello World !' type of problem in deep learning commnunity and
+yet it gives proper and perfect introduction to deep learning methods.
 
-Singular Value Decomposition is a mathematical concept where a given matrix can
-be represented as product of three matrices, which are left orthogonal singular
-matrix, one diagonal matrix containing singular values and one right orthogonal
-singular matrix. With this kind of decomposition of weight matrices of our
-original neural network, we can compress the weight matrices, by using these
-three matrices and choosing only select singular values which are most
-important.
+\subsection{Need for Deep Learning}
 
-By choosing the number of singular values that we want to consider, we can
-compress the neural network by compromising on the test accuracy. Through this
-project, we want to be able to have the option of choosing this number among the
-following  - 10, 20, 50, 100, 200. Lets call this number D. For each value of 
-D, we want to train the network with this compressed neural network and see 
-how well it is able to predict the test images.
+Compared to traditional machine learning techniques, applying Deep Learning
+method to this problem yields better results. This is done by building Neural
+Networks. Neural Network have come to become very powerful black boxes that are
+capable of imitating any non-linear function (of course linear too !) in the
+world. A typical Neural Network consists of several layers and each layer
+consists of several 'neurons'. Neurons are the fundamental building blocks of
+neural network.  Each neuron-input path has an assiciated weight to it. It is
+similar to how important a certain neuron is in that layer. A neuron takes in as
+input a vector with a bias term added to that input vector and performs dot
+product of that combined input vector with weight vector and produces an
+intermediate output. Till now, there is no introduction of non-linearity, so the
+method by which neural networks approximate non-linear relationships is by
+activation functions. There is an activation function at the output of every
+neuron. This function takes in as input the above intermediate output of the dot
+product and depending on the function rules, gives out final output. More on
+this, is described later in detail.
 
-REST services will be implemented to perform Singular Value decomposition on 
-our Neural network accorging to our chosen choice of D and train the network,
-do feed forwarding of test images and display the accuracy.
+\subsection{What and Why Singular Value Decomposition ?}
 
-Rest APIs with D = 10, 20,50, 100, 200 will be created.
+Building neural networks for MNIST classification problem and using this
+network is a computationally heavy task. On a typical CPU, training the neural
+network and performing feed forward will take atleast 1 hour ! And we are not
+even building Convolutional neural networks for analyzing the images, we are
+only building fully connected neural networks which are simpler to use. If
+only there were a way to compress this build neural network and use it without
+losing too much accuracy on predicting new images ! Indeed there is a solution
+to it, it is Singular Value Decomposition. Without giving too much away here,
+as the name hints, singular value decomposition technique compresses our
+original neural network by coming up with different representation of the
+original weight matrices that are of the lower rank and therefore need fewer
+calculations to perform dot products. This implies our network is not so
+computationally heavy anymore, but the accuracy reduces a little bit, but not
+too much to question the whole method. We can even optimize our compressed
+network to further optomize the accuracy and it is one of the objectives of
+this project. There is a paremeter, D, called size of Singular matrices. The
+lower the value of D, the higher the compression of the neural network and
+therefore the lower the test accuracy of the network. So, there is a trade off
+we must be aware. We usually dont want too low value for D for the sake of
+simple network and have poor accuracy. Nor do we want too high value for D for
+sake of better accuracy but at the cost of complex network. We proposed some
+typical values for D, which are, [10,20,50,100,200] for which we will be
+performing singular value decomposition on the MNIST classification problem to
+compress the original network and also optimize the compressed network for
+further use. MNIST data is available on the internet in several formats. It
+can also be downloaded from the internet with direct tensorflow python
+commands in our program. It contains total 65000 data. Of the total data 55000
+are train images on which we first train  our neural network and the rest
+10,000 are test images to test how well our model has fared on the test
+images.
 
-~\cite{mnist}
-~\cite{svd}
+Although the Deep Neural network modelled on MNIST classifies the images more
+accurately than usual Neural networks with less than 2 layers or other machine
+learning algorithms there are many problems that these networks will suffer like
+issues with speed, power consumption to update millions of parameters and  these
+problems grows when the size of data set increases. Also there are problems to
+train such a deep network like vanishing gradient, Overfitting and even after
+the model is trained, computational time taken by the model to predict the
+output is also high. One of the main method to reduce the complexity of Deep
+Neural Network is Singular Value Decompostion.
 
-\section{Conclusion}
+\subsection{Rest Service with Swagger}
 
-Through this project, we shall be able to compress the network for MNIST deep 
-learning classification problem by applying Singular Value Decompositon on them
-according to our chosen number of singular values with the help of REST services 
-and APIs for each value of D.
+We are implementing Rest Service Framework with Swagger Codegen for this
+project. This Rest service when implemented, will connect to the server on MNIST
+database website, download the image data, construct the original full sized
+neural network, then apply Singular Value decomposition on it, optimize the
+compressed network for different values of size of SVD(D), output the test
+accuracy of our down-sized network into a website.
+
+\section{Dataset Description for MNIST}
+
+The MNIST database is a large database of images that have hand written digits
+which are widely used for various image processing systems and in the field of
+machine learning and deep learning. The MNIST database consists of 60,000
+training images and 10,000 testing images. The images in MNIST database come
+from two sources of NISTs databases, Speical Database 1 and Special Database
+3. These were images of digits written by high school students and employees
+of United States Census Bureau. The MNIST database is hosted on  Yann Lecunn's
+website, Director of AI research, Facebook. Each image in MNIST dataset is a
+28x28 pixels, which is usually converted into 1 dimensional array of numbers
+to be used for model building. This results in a 784 dimensional vector per
+image.
+
+Each image in MNIST data set is of 784 dimensions. It was a challenge to build a
+model on large number of dimensions. Many dimensional redcution techniques were
+used to reduce the dimensions of data. Building a model for this then was
+challenging with lots of preprocessing and feature learning. But with the
+discovery of using more layers with in the neural network this is achievable
+with an accuracy of 98 percent. So we have used Deep Learning techniques in this
+Paper to build a model as REST service.
+
+Here are the typical image of the MNIST dataset.
+
+\begin{center}
+\includegraphics[scale=5]{images/mnist-digits-small.png}\label{s:MNIST-digits-small}
+\end{center}
+\textbf{Figure 1: Hand written numbers in MNIST Dataset
+~\cite{hid-sp18-401-MNIST-image}}
+
+\begin{center}
+\includegraphics[scale=0.25]{images/mnist-digit-big.png}\label{s:MNIST-digit}
+\end{center}
+\textbf{Figure 2: Hand written number in MNIST Dataset
+~\cite{hid-sp18-401-MNIST-single-digit-image}}
+
+
+
+
+
+\section{Singular Value Decomposition}
+
+Singular Value Decomposition is factorization of a matrix into 3 matrices.
+\begin{align*}  
+A&=USV^{T}  
+\end{align*}
+
+Here U and V matrices are orthogonal matrices and S is singular matrix which is
+also diagonal. Singular Value Decompostion can be defined for any kind of matrix
+rectangular or square. Here the columns in matrix U are called left singular
+Vectors and columns in V are called right singular Vectors. These singular
+Vectors form an orthogonal set. 
+   
+Singular Value Decomposition can be understood from a lucid example. Considering
+A (which is a matrix of shape n/d) as a matrix with n points in a d dimensional
+space. Singular Value Decompostion is to factorsize A into 3 matrices that is
+each point of n points in A is finding its respective point in k dimensional
+space that is finding a U matrix with shape n/k and then V matrix with shape k/n
+that again projects these n points in k dimensional space to n dimensional
+space. This fitting of points into lower dimensional space is done using best
+least squares fit. Least squares fit tries to minimize the distance between n
+dimensional space and k dimensional space.
+
+Singular value Decomposition is applied to reduce the dimensions in many
+algorithms. One such traditional use is Principle Component analysis where any
+number of points in d dimensional space are reduced to k dimensional space where
+k is much less than d.
+
+\section{Neural Net Model for MNIST}
+
+Each image in MNIST data set is of 784 dimensions. It was a challenge to build
+a model on large number of dimensions. This problem is commonly called as 'The
+curse of dimensionality', because although many dimensions means more features
+about the image (which implies more data to build the model), it also means
+the network will become computationally heavy. Many dimensional redcution
+techniques were used to reduce the dimensions of data. Building a model for
+this then was challenging with lots of preprocessing and feature learning. But
+with the discovery of using more layers with in the neural network this is
+achievable with a typical test accuracy of around 96-98 percent.
+
+In this project we used Tensor flow, a deep learning package in python
+language, for building our model to classify the image from MNIST data. A
+fully connected network is trained for the model.
+
+\subsection{Tensor-flow}
+
+Tensor flow is an open source software library in python which is used for
+programming a wide variety of tasks. It is a computational framework where we
+can build models at our preferred level of abstraction.It is a flexible
+architecture using a single API it allows to deploy the heavy computation on
+multiple CPUs or GPUs in a desktop or server. Tensor flow used data flow graphs
+to represent all the parameters, dependencies and operations. Program using
+Tensorflow starts with defining the graph, operations and then define the
+sessions to run this graph and update the parameters. 
+
+
+
+\subsection{Hidden layers} 
+
+Hidden layers are what makes neural networks look like biological neurons in
+human body. They take the information from the input and learn the features.
+Weight matrices connect the input layer to hidden layer, hidden layer to hidden
+layer and hidden layer to output layer. Using more than two Hidden layers output
+of a neural network can approximate any complex function. 
+
+\begin{itemize}
+
+  \item For the MNIST classification we used 5 hidden layers each hidden layer
+  with 1024 neurons and also 6 weight matrices connecting all the layers.
+
+  \item First weight matrix is of size 784/1024 that which connects the input
+  layer and first hidden layer.
+
+  \item Next four weight matrices are of size 1024/1024 which connect the
+  hidden layers in between that have 1024 neurons each.
+
+  \item The last weight matrix is of size 1024/10 which connects with the
+  output layer.
+
+  \item The output layer has 10 neurons. 
+
+\end{itemize}
+
+
+The following figure is for reference only, and is not the exact architechture
+that applies for this project
+
+\begin{center}
+\includegraphics[scale=0.25]{images/neural-network.jpeg}
+\label{s:Deep Neural Network}
+\end{center}
+\textbf{Figure 4: Deep Neural Network
+~\cite{hid-sp18-401-Neural-Network-image}}
+
+
+For each image in the data set only one neuron in the output will be active
+and classification of the image is done based on which particular neuron is
+active. This brings us to the next section of activation functions that we
+used in this project.
+
+
+
+\subsection{Activation Functions Used}
+
+Activation function are applied to each neuron, they decide whether the
+information neuron recieving should be activated or not. Without an activation
+function a neural network simply does a linear transformation so it is similar
+to linear regression model. Activation functions are important to neural
+network to develop non-linearity in the approximated function . A sufficiently
+large network using any of the common non linear activation function can
+approximate arbitrarily complex functions. Activaton function also have
+limitaions like they should be able to differentiable in order to propogate
+error back in backpropagation. There are many choices for activation function
+like Binary Step function, Linear function, Sigmoid function, Tanh function,
+ReLU function, Leaky ReLu function and Softmax function. We tried different
+choices for activation function like Sigmoid, Softmax, Leaky ReLU and ReLU,
+ReLU showed best results among all the 4 for the hidden layers, while the
+output activation must be sigmoid activation because we are outputting the
+probability. 
+
+\subsubsection{Relu}
+
+ReLu function (Rectified Linear Function) gives output zero if input is
+negative and raw output otherwise.
+
+\begin{align*}
+f(x)&= max(x,0)
+\end{align*}
+
+\begin{center}
+\includegraphics[scale=0.35]{images/relu-activation-function.jpeg}
+\label{s:ReLU-function}
+\end{center}
+\textbf{Figure 4: ReLU Activation Function
+~\cite{hid-sp18-401-ReLU-activation-function}}
+
+Output of ReLU function is maximum of zero and itself. Gradient of this function
+is a constant value. So ReLU function overcomes the issue of Vanishing Gradient
+which is severe for Sigmoid function. ReLU outputs for the negative value is
+zero this makes the output more sparse where the sigmoid function always gives a
+value between -1 and +1.
+
+
+\subsubsection{Sigmoid}
+
+Sigmoid Function is specefic type of logistic function which has output range
+between 0 to 1. It is often used in classification problems, as we are
+assigning class to observation based on how likely it belongs to that class,
+in other words, probability. The mathematical formula for sigmoid function is
+below.
+
+\begin{align*}
+S(x)&=\frac{e^{x}}{1+e^{x}}
+\end{align*}
+
+\begin{center}
+\includegraphics[scale=0.35]{images/sigmoid-activation-function.jpeg}\label{s:Sigmoid-function}
+\end{center}
+\textbf{Figure 3: Sigmoid Activation Function
+~\cite{hid-sp18-401-sigmoid-activation-function}}
+
+Sigmoid function has a characteristic S-shaped curve or sigmoid curve. Some of
+the function characteristics are, it is bounded, differentiable, and it is
+real function defined for all real input values and its derivative is non-
+negative at each point.
+
+
+
+
+\subsection{Back Propagation}
+
+The fundamental nature of neural network or any machine learning model is that
+they can learn by themselves given some training. We now have constructed our
+network which has several layers, each layer has several neurons, and weights
+connecting between neurons of adjacent layers. Now, our neural network must be
+trained with train data, in our case, training images. More specefically, the
+neural net must learn the best weights suitable for this problem, because the
+knowledge of a neural network lies in its weight matrices. Neural networks
+train by a method called Back Propagation.  Back Propagation is simply
+propagation of errors back from output layer till input layer. Errors are the
+difference between groud truth value and predicted value. In our case, value
+is the class of the image, which number(0-9) does a given image belongs to ?
+During back propagation, we do not literally propagate this error, instead we
+try to minimize this error. So naturally, we differentiate this error
+function, to get the slpe and direction of gradient descent of error function.
+We know that gradient of function takes a value zero at its minimum or
+maximum. We hope to achieve this minimum for the error function, sometimes
+called loss function, by updating our weights in the direction of minimum. It
+is recommended to multiply this derivative with a learning rate because all
+neural networks learn at different rates, and we dont want to take too big or
+small steps in updating the weights. This learning rate must be experimented
+with based on the problem. For MNIST classification we used a learning rate of
+0.0001.
+
+
+
+\subsection{Optimization Techniques} 
+
+There are several optimization techniques developed for training neural
+network that are more sophisticated than simply taking derivative of error
+function. Some of the typical ones are Adam Optimizer, RMSProp Optimizer,
+Gradient Descent Optimizer, Adagrad Optimizer. We have found Adam optimizer
+best suited for this training our MNIST network. Adam optimizer takes into
+consideration both the momentum of gradients and also maintains per-parameter
+learning rates that are adapted based on the average of recent magnitudes of
+gradients for weight.
+
+
+\subsection{Mini batching} 
+
+As we know, MNIST dataset consists of 60,000 training images and 10,000 test
+images. During training of neural network, it is not advisable to send all of
+the 60,000 input vectors into our network and update weights all at a time.
+This will be computationally heavy, as so many dot products of matrices must
+be performed at a time. In theory, sending one image at a time is also not
+advisable, as there is a higher chance of neural network learning all the
+noise in the train data, istead of the underlying function. Instead, we can
+send the trainig images in batches of considerable size. This has added
+benefit, in that, weights gets updated quickly and our neural network learns
+fastly.
+
+
+\subsection{Summary of Training the Full Sized Network}
+
+\begin{itemize}
+
+ \item Learning rate  : 0.001
+ \item Minibatch size : 256
+ \item Loss Function. : Softmax Cross Entropy
+ \item Optimizer      : Adam Optimizer
+ \item No of Epochs   : 1000
+ \item Test Accuracy  : 97 percent
+
+\end{itemize}
+
+\section{SVD on MNIST}
+
+Neural Network trained on MNIST data is computationally heavy and complex with 5
+hidden layers and 1024 neurons in each hidden layer. Not only the training the
+model but the classification on any test image also takes more time.  This is
+because the weight matrices in our original full sized network are of the higher
+rank, and dot product of them with input vectors involves more number of
+multiplications and additions.   In order to compress the network Singular Value
+Decomposition is applied on all the weight matrices. SVD reduces the rank of the
+resultant representation of the original weight matrices. Applying Singular
+Value Decompostion on the weight matrix with shape (n,m) gives 3 singular
+matrices they are left singular matrix(U), right singular matrix(V) and a
+Diagonal matrix with a singular values that is Singular Value Matrix(S) with
+shapes (n,D),(D,D),(D,m),  where D is the maximum of n and m. Values in Singular
+matrix are sorted in the order of their contribution to the approximation. So it
+means based on the approximation and complexity trade off, the  least important
+singular values can be discarded.
+
+ \begin{align*}
+ W& = U_{:,1:D}S_{1:D,1:D}V_{:,1:D}^{T}
+ \end{align*}
+
+ D value can be choosen from between 0 to maximum of m and n. Discarding 
+ lesser significant singular values in each weight matrix of the Neural Network 
+ reduces the complexity of network to a great extent. Deep Neural Network 
+ trained with 5 layers have six weight matrices and first weight matrix is of 
+ shape (784,1024). When Singular value decomposition is applied and D value is 
+ choosen 20, then the weight matrix first factorizes into 3 matrices of size 
+ (784,1024), (1024,1024) and (1024,10) and then discarding the lesser 
+ significant values other than 100 reduces the sizes of each matrix to (784,20),
+ (20,20) and (20,10). Initializing a new network where replacing weight matrices
+ with the matrices obtained after SVD approximation where S and V are combined 
+ into one single matrix of size (20,10) gave the same test accuracy of 98 
+ percent. 
+
+ After we get our compressed network, the test accuracy on it is less than the 
+ accuracy of the full sized network. We can further optimize our compressed 
+ network by building a new network. New Network is initialized with reduced SVD 
+ applied weight matrices and trained again. This greatly reduced the memory 
+ occupied by the model.
+
+\section{REST Service Framework for MNIST}
+
+\subsection{REST Service}
+
+REST stands for Representational State Transfer. It is an architechtural style
+that defines applications that are network based, like http for example.  It is
+based on stateless, client-server, cacheable communications protocol. REST is
+not based on HTTP, although it is used in most cases. In such cases, RESTful
+applications use HTTP requests to post data therby create/update resources, read
+data or resources, delete data or resources. Methods such as GET, PUSH, POST and
+DELETE can be used to implement a REST service.
+
+
+\subsection{Swagger}
+
+'Swagger is the worlds largest framework of API developer tools for the OpenAPI
+ Specefications(OAS), ending development across entire API lifecycle, from
+ design and documentation, to test and deployement'.
+
+ Major swagger tools are 
+
+\begin{itemize}
+
+  \item Swagger Core
+  \item Swagger Codegen
+  \item Swagger UI
+  \item Swagger Editor
+
+\end{itemize}
+
+We have used swagger codegen to generate server side code. 
+
+We implemented REST service with Swagger following Open API 2.0 
+specefications. This has been done in three steps:
+
+\subsection{Defining our REST Service}
+
+Here, our we are developing REST service for compressing original neural network
+in MNIST classification problem, and we are also optimizing the compressed
+network by connecting to MNIST database and gatherinng the necessary data first.
+
+We are publishing our results on a web page as a JSON object. For this we are
+hosting the JSON output on localhost:4874 We have defined our REST service in
+svd.yaml file, which contains information about description of service, host
+address, basepath, input and output formats etc.
+
+\subsection{Server Side Stub Code Generation with Swagger} 
+
+First we setup the Codegen environment by installing Swagger Codegen tool. Next,
+we generate the server stub code with the help of jave jar file, swagger-
+codegen-cli.jar. We find the generated python flask code in flaskConnexion
+directory, with python2 compatibility.
+
+Next we find under the flaskConnexion directory, swagger\_server directory, which
+has folders for models and controllers, which is where conroller code resides.
+Now, we define the exact service that we want to implement in the
+default\_controller.py file . To make things more simple, we have defined my
+stub\_code in a different python file, svd\_stub.py and then we linked this file
+to the default\_controller.py file.
+
+So our entire implementation of this project is in svd\_stub file, and the
+function svd\_example() returns a string, which has entire information of the
+result for this project, different values of size of SVD considered (D), initial
+test accuracy of the MNIST network, final test accuracy of SVD compressed
+network for each value of D.
+
+\subsection{Install and Run the REST Service}
+
+First we make sure to install the latest pip, as we will be needing it to
+install other packages. Next we install requirements.txt file that was generated
+earlier in the folder flaskConnexion. Next we install server side code in
+setup.py file.
+
+Next for this project we need some Machine learning and deep learning packages
+in python language. With the help of pip, we installed libraries like numpy,
+pandas, scipy, scikit-learn and tensorflow.
+
+
+\section{Dockerizing Our Work}
+
+We have made our entire project capable of running anywhere in cloud, on any
+platform by creating container image and dockerizing it.
+
+'A Docker is the company driving the container movement and the only container
+ platform to address every application across the hybrid cloud.'
+
+'A container image is a lightweight, stand-alone, executable package of a piece
+ of software that includes everything related to run it: code, runtime, system
+ tools, system libraries, settings.'
+
+We have used official docker image for Ubuntu for our docker. We have also
+installed necessary tools, packages required for the entire project, including
+tools required for Rest service with Swagger.
+
+\section{Results and Conclusion}
+
+In summary, we had succesfully built a REST service framework that connects to
+MNIST database, downloads image data, builds a full sized Neural Net,
+thereafter, performs Singular Value Decomposition of the full sized network, for
+different values of size of SVD, then further more impproves the compressed
+network, by further training, then finally outputs all the test accuracies as a
+JSON object in a website hosted at localhost:8080/api/svd.This optimized and
+compressed neural network that we have built has a lot of image classification
+applications, especially mobile type, which require  shorter computation time.
+
+
+\section{Work Breakdown}
+
+Priyadarshini Vijjigiri has worked on python code for building Deep Neural
+Network model and optimizing it for MNIST Data. Goutham Arra has worked on
+Applying Singular value Decomposition and reducing complexity of Network.
+Restful webservice with swagger and Dockerizing the swagger was equally
+contributed by Priyadarshini Vijjigiri and Goutham Arra. Project paper was
+equally contributed. by both the team members.
+
+
 
 \begin{acks}
 
@@ -103,4 +573,7 @@ and APIs for each value of D.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
+
+
+
 

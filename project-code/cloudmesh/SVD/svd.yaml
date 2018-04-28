@@ -8,7 +8,7 @@ info:
     name: "Cloudmesh REST Service for Deep Learning"
   license: 
     name: "Apache"
-host: "localhost:4874"
+host: "localhost:8080"
 basePath: "/api"
 schemes: 
   - "http"

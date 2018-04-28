@@ -1,0 +1,376 @@
+% status: 50
+% chapter: TBD
+
+\title{REST Service Framework for Singular Value Decomposition on MNIST Image Classification Problem}
+
+
+\author{Goutham Srivatsav Arra}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+}
+\email{garra@iu.edu}
+
+\author{Priyadarshini Vijjigiri}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+\email{pvijjigi@iu.edu}
+
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{G. v. Laszewski}
+
+
+\begin{abstract} 
+
+For tasks such as image classification, Speech denoising etc.. Deep learning
+algorithms with complex  neural networks are being used as they have proven more
+accurate in the recent  times. However, one of the downsides to running deep
+learning algorithms is they can be computationally heavy and require huge memory
+to execute. The solution to  the above problem is performing Singular Value
+Decomposition on them. In this project we have built a dockerized swagger
+webservice  that trains a fully connected neural network for mnist
+classification and applies singular value decomposition according to our choosen
+value of SVD size(D) and train the network again. Entire Model and singular
+value decomposition is done in  python using Tensorflow.
+
+ \end{abstract}
+
+\keywords{hid-sp18-401,hid-sp18-421, Singular Value Decomposition, Swagger,
+Docker, Deep Learning, Neural Networks, Tensorflow}
+
+
+\maketitle
+
+\section{Introduction}
+
+
+Data is growing faster than ever before and machine learning algorithms
+developed previously are no longer predicitng the required outputs with best
+accuarcy as they did with data of less size. So the Deep learing came into the
+rescue by adding the number of layers in the neural network but Deep Neural
+Networks are potential only when they are deep and big. The hidden layers of the
+Neural Network to eventually feel out what it's relation ship with the target
+varible is As the data size grows Deep Learning networks are subset of Machine
+learning algorithms. As we all know Machine learning algorithms are used to get
+insights from the data. Deep learning is a part of machine learning uses a
+specific algorithm Neural Network. 
+
+
+\section{MNIST image classification }
+
+MNIST(Mixed National Institute of Standards and Technology) classification is
+one of the famous classification problem in the deep learning community, It is a
+dataset of images with handwritten digits. Dataset has handwritten digit grey
+scale image of size 28/28 pixels and its corresponding label that is actual
+digit, a number in between 0 and 9. The Aim of this problem is classification of
+images into  10 categories of numbers from 0-9. 
+
+
+MNIST data is available on the internet in several formats. It can also be
+downloaded from the internet with direct tensorflow python commands in our
+program. It contains total 65000 data. Of the total data 55000 are train images
+on which we first train  our neural network and the rest 10,000 are test images
+to test how well our model has fared on the test images.
+
+Each image if of 28/28 pixels which is converted into 784-1dimensional array.
+This problem is commonly called as "The curse of dimensionality" because each
+image 784  dimensions. Often this task is made challenging by doing
+preprocessing, dimensionality reduction and feature learning. But with the new
+techniques of Deep learning, classiying these high dimensional problem is made
+easy.
+
+
+Although the Deep Neural network modelled on MNIST classifies the images more
+accurately than usual Neural networks with less than 2 layers or other machine
+learning algorithms there are many problems that these networks will suffer like
+issues with speed, power consumption to update millions of parameters and  these
+problems grows when the size of data set increases. Also there are problems to
+train such a deep network like vanishing gradient, Overfitting and even after
+the model is trained, computational time taken by the model to predict the
+output is also high. One of the main method to reduce the complexity of Deep
+Neural Network is Singular Value Decompostion.
+
+\section{Singular Value Decomposition}
+
+Singular Value Decomposition is factorization of a matrix into 3 matrices.
+\begin{align*}  
+A&=USV^{T}  
+\end{align*}
+
+Here U and V matrices are orthogonal matrices and S is singular matrix which is
+also diagonal. Singular Value Decompostion can be defined for any kind of matrix
+rectangular or square. Here the columns in matrix U are called left singular
+Vectors and columns in V are called right singular Vectors. These singular
+Vectors form an orthogonal set. 
+   
+Singular Value Decomposition can be understood from a lucid example. Considering
+A (which is a matrix of shape n/d) as a matrix with n points in a d dimensional
+space. Singular Value Decompostion is to factorsize A into 3 matrices that is
+each point of n points in A is finding its respective point in k dimensional
+space that is finding a U matrix with shape n/k and then V matrix with shape k/n
+that again projects these n points in k dimensional space to n dimensional
+space. This fitting of points into lower dimensional space is done using best
+least squares fit. Least squares fit tries to minimize the distance between n
+dimensional space and k dimensional space.
+
+Singular value Decomposition is applied to reduce the dimensions in many
+algorithms. One such traditional use is Principle Component analysis where any
+number of points in d dimensional space are reduced to k dimensional space where
+k is much less than d.
+
+\section{Model for MNIST}
+
+Each image in MNIST data set is of 784 dimensions. It was a challenge to build a
+model on large number of dimensions. Many dimensional redcution techniques were
+used to reduce the dimensions of data. Building a model for this then was
+challenging with lots of preprocessing and feature learning. But with the
+discovery of using more layers with in the neural network this is achievable
+with an accuracy of 98 percent. So we have used Deep Learning techniques in this
+Paper to build a model as REST service.
+
+\subsection{Tensor flow}
+
+Tensor flow is an open source software library in python which is used for
+programming a wide variety of tasks. It is a computational framework where we
+can build models at our preferred level of abstraction.It is a flexible
+architecture using a single API it allows to deploy the heavy computation on
+multiple CPUs or GPUs in a desktop or server. Tensor flow used data flow graphs
+to represent all the parameters, dependencies and operations. Program using
+Tensorflow starts with defining the graph, operations and then define the
+sessions to run this graph and update the parameters. In this project we used
+Tensor flow in building model to classify the image from MNIST data. A fully
+connected network is trained for the model.
+
+\subsection{Hidden layers} 
+
+Hidden layers are what makes neural networks look like biological neurons in
+human body. They take the information from the input and learn the features.
+Weight matrices connect the input layer to hidden layer, hidden layer to hidden
+layer and hidden layer to output layer. Using more than two Hidden layers output
+of a neural network can approximate any complex function. For the MNIST
+classification we used 5 hidden layers each hidden layer with 1024 neurons and
+also 6 weight matrices connecting all the layers. First weight matrix is of size
+784/1024 that which connects the input layer and first hidden layer. Next four
+weight matrices are of size 1024/1024 which connect the hidden layers in between
+that have 1024 neurons each. And the last weight matrix is of size 1024/10 which
+connects with the output layer. Output layer has 10 neurons. For each image in
+the data set only one neuron in the output will be active and classification of
+the image is done based on which particular neuron is active.
+
+First layer c
+
+ Relu activation function is used at the end of each hidden
+layer
+
+
+\subsection{Activation Function}
+
+\subsection{Optimization Techniques}
+
+\subsection{Learning Rate}
+
+\subsection{Mini batching}
+
+\subsection{}
+
+\subsection{SVD on MNIST}
+
+
+
+
+\section{Architecture}
+
+The main design principle of Twilio is enabling serverless architecture which is
+known as serverless computing or function as a service for the business 
+applications. Twilio hosts the server and eliminates the need for developers to 
+focus on services which are out of scope for the main business domain. This 
+architecture provides the flexibility of enabling functions individually and 
+scaling up based on the requirements. Each function required for communication 
+integrations is hosted by Twilio as Function as a Service which is called FaaS. 
+Typically, all the management such as physical server establishment, deploying 
+the operating system, web hosting processes through virtual servers is managed 
+by Twilio and provides a final API which is ready to be integrated into the 
+business applications to enable communication interfaces with the customers. 
+There are various architecture diagrams for Twilio, and it varies based on the 
+communications APIs and the business applications. Here, let's consider the 
+basic architecture for building telephony applications using Twilio TwiML
+~\cite{hid-sp18-406-twilio-architecture1}.
+
+Figure~\ref{f:architecture} explains the workflow of Twilio.
+  
+
+TwiML is the set of instructions which generates the workflow depending on the 
+incoming call or SMS. When the caller dials number purchased from Twilio 
+or sends an SMS on their phone, Twilio's inbound call dispatcher receives the 
+call or text. 
+a. Now the connection is established, and the dispatcher will make an HTTP GET 
+or POST to the Voice or SMS URL specified given for that particular number. 
+This Voice URL will be displayed in the Sandbox App of the Twilio DashBoard. 
+And then set the voice and SMS URLs under the Numbers tab in the Dashboard for 
+the purchased Twilio Numbers.
+b. The TwiML document is used as a point of reference to respond to the Twilio 
+requests for the Voice and SMS URL which are specified in the Sandbox. TwiML 
+parser will scan this document and then executes the specified word tag. For 
+this example, for a 'say' verb in the document Twilio would perform the action 
+as reading the text to the caller using the text-to-speech synthesizer; for 
+'dial' Twilio would perform the action such as dialling the specified number 
+and connect the caller; 'redirect' Twilio would fetch another TwiML document
+~\cite{hid-sp18-406-twilio-architecture2}.
+c. In order to send and receive the content on the web, Twilio will perform an 
+HTTP POST to a web server and the metadata associated with the call is embedded
+in the body of the POST request. To retrieve the details associated with the 
+call Twilio performs HTTP GET request and the metadata associated with the call
+will be passed as URL query string parameters
+~\cite{hid-sp18-406-twilio-architecture3}.
+
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Twilio-Architecture.png}
+  \caption{Twilio Architecture~\cite{hid-sp18-406-twilio-architecture-image}}
+\label{f:architecture}
+\end{figure}
+
+
+
+
+\subsection{Programmable Interfaces}
+
+Twilio provides software-based platform for developers along with 
+prefabricated building blocks to integrate voice, messaging, video and 
+several add-ons like sentimental analysis into the application which are 
+required to build communication functionality. These APIs are further developed 
+as use case API's which provide a higher level of abstraction of building 
+communication interfaces for application and thus enabling programmable 
+connectivity::
+a. Authy: It is very important to authenticate the contact information when the 
+user signs up into the business application. One of the best approaches is to do
+account verification through SMS. Twilio provides two-factor authentication API.
+By integrating this API, the application will be able to send the one-time 
+password through text message and the user enters this code to complete the 
+registration.  
+b. Reminders: Automating the process of communicating with the customers using 
+these Appointment Reminders API will help the customers to be updated about 
+their appointment status. This API focuses on building appointment reminders 
+when the appointment is created and until the time it is scheduled and attended.
+c. Conference and Broadcast:
+For any company to work collaboratively globally from various locations, it 
+should be well organized to handle video conferences and broadcast abilities. 
+Twilio provides APIs which enables any organization to build a moderate 
+conference line that allows people to listen, speak or moderate during the call.
+Voice Broadcasting APIs will allow broadcasting a pre-recorded voice message to 
+a list of contacts.
+d. Notifications:
+In order to deliver time-sensitive alert messages, a text message is the most 
+suitable way compared to emails as it helps to reach the end users quickly by 
+avoiding the pile of inbox emails. APIs are provided to send out alert messages
+as notifications from the web and mobile applications.
+e. Click to Call:
+Customers always look for easy ways to reach their business people such as 
+customer care. It is very important to keep the customers happy in such matters 
+and Twilio provides Click to Call APIs for these requirements which enable 
+developers to implement the call connections to the customer in the most 
+suitable way.
+f. Automated Survey:
+Feedback is an important factor which verifies the actual needs of customers and
+the features which need to be improvised based on those requirements. Using the
+Twilio's automated survey APIs developer can build a survey form, which will
+call the customer at the point of service to get immediate feedback opinions. 
+Thus, these Automated Survey APIs integrates the customer relationship data to
+the database without any difficulty.
+
+The scope of Twilio is wide apart from the above-listed APIs including services 
+for Masked Phone Numbers, Dynamic Call Center, Call Tracking, Call Forwarding, 
+Workflow Automation, ETA Notifications, Instant Lead Alerts, Employee Directory
+and many more~\cite{hid-sp18-406-twilio-architecture4}.
+   
+\section{Use case}
+ 
+\subsection{General Usage}
+
+The most basic use case of Twilio is to enable communication messages based on 
+the scenarios. First, a developer will sign up for Twilio, then choose a local 
+virtual number which is used to send and receive voice or SMS messages. The next
+step is to map the virtual number to a request URL which will guide the 
+communication interface how to manage the content of phone calls. Here, the 
+developer will define a set of business rules or instructions to manage the 
+calls from each customer. These rules include: 
+a. Say : update the customer regarding the order update or play the prerecorded 
+informational message 
+b. Gather : collect all the required information from the user. 
+c. Record : record the complete call conversation. 
+d. Reject : Hang up. 
+e. Dial : make  a call to the number.
+Here, Twilio initiates the phone call or message flow on the one end and on the 
+other end, it provides APIs for developers who will instruct or code the 
+Twilio's actions for those calls. Twilio also provides load balancing of the 
+calls using cluster~\cite{hid-sp18-406-twilio-usecase1}.
+
+\subsection{Communication for on-demand service}
+
+Lyft is a ridesharing application. The on-demand service requested by the 
+customers requires real-time communication between the passengers and the 
+drivers. By integrating Twilio communication APIs Lyft has ensured real-time 
+SMS driver updates for passengers and also the ability of passenger calling the
+driver without sharing the individual numbers. Here, when the ride is accepted 
+by the driver, a communication channel is established without the dependency of
+sharing the individual numbers. The call button on the application will 
+initiate a phone call to the Twilio phone number assigned to that ride and 
+routes to the driver mobile phone. Thus, ensuring privacy standards for both
+drivers and passengers. Lyft also uses other features of Twilio such as sending
+notifications regarding the ride updates using the SMS integration API.  
+The unique feature of Twilio such as masked numbers was integrated for Lyft's 
+Lost and found procedure~\cite{hid-sp18-406-twilio-usecase1}.
+
+Figure~\ref{f:usecase} explains the usecase of Twilio.
+
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Twilio-Usecase.png}
+  \caption{Twilio Usecase~\cite{hid-sp18-406-twilio-usecase-image}}
+\label{f:usecase}
+\end{figure}
+
+
+
+\section{Conclusion}
+Twilio is basically a software as a service platform which provides a set of 
+APIs which is hosted in the cloud and enables any developer to embed telephony 
+into applications. Through its innovative ideas which target the daily needs of 
+the customers, services provided by Twilio is increasing rapidly. With Twilio, 
+you can reach customers in the ways they prefer, and engage with them 
+effectively using context related to that interaction. As customer experience 
+has become the significant factor, programmable communications have become more 
+crucial than ever to the success of businesses today
+~\cite{hid-sp18-406-twilio-conclusion1}. 
+ 
+The customizable alerts of Twilio help companies to determine the most suitable 
+way to reach the users based on their preferences. Twilio has also extended APIs 
+which allow developers to embed video conferencing within an application. Twilio
+best fits the customer needs because of its global compatibility feature which 
+includes more than 1000 wireless carriers around the world. By integrating  
+telephony system into the application any business can establish an excellent 
+way of extending use and authenticity for their IT solution. This helps the 
+business to improve productivity, usability, reliability and perform the 
+business in a cost-effective way. Hence, by mixing cloud and on-premises with 
+mobile, Twilio enables developers to work on next-generation business tools
+~\cite{hid-sp18-406-twilio-conclusion2}.
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
+
+
+
+
