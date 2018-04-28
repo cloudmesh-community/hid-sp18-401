@@ -32,11 +32,11 @@
 
 \begin{abstract}  
 
-XGBoost stands for Extreme Gradient Boosting. XGBoost is an open source software
-library where you can  implement Gradient Boosting machine learning method. It
-was created by Tianqi Chen, now with contributions from many developers and part
-of a wider collection of open source libraries developed by Distributed Machine
-Learning Community(DMLC).
+XGBoost stands for Extreme Gradient Boosting. XGBoost is an open source 
+software library where you can  implement Gradient Boosting machine learning 
+method. It was created by Tianqi Chen, now with contributions from many 
+developers and part of a wider collection of open source libraries developed by
+Distributed Machine Learning Community (DMLC).
 
 \end{abstract}
 
@@ -51,8 +51,8 @@ Learning Community(DMLC).
 Before talking about XGBoost, it is best to give introduction to general
 gradient boosting method. Gradient Boosting is a machine learning technique
 used to build both regression and classification models that is primarily
-based on decision trees(it works on other type of models too). A decision tree
-is a type of mapping technique of the data or observations to the target
+based on decision trees (it works on other type of models too). A decision
+tree is a type of mapping technique of the data or observations to the target
 variable based on a certain splitting criteria, that has yes or no answer,
 dividing input data into two groups, therby forming a tree.  Building only a
 single decision tree model on a large dataset, has been proven to be  unstable
@@ -68,19 +68,17 @@ function, to find the optimum point, and then updating the  parameters
 accordingly, for a fixed number of iterations or until the loss converges
 below a threshold point.
 
-But building gradient boosting models on huge datasets (that sometimes
-contain more than 500,000 observations) is computationally onerous,
-not so efficient.  By the use of XGBoost, we can build heavy gradient
-boosting models on large data sets and run them fastly with better
-performance. ``The name xgboost, though, actually refers to the
-engineering goal to push the limit of computations resources for
-boosted tree algorithms. Which is the reason why many people use
-xgboost.'' - says Tianqi Chen, creator of
-XGBoost~\cite{hid-sp18-401-XGBoost-MLmastery}. The description of
-XGBoost according to the software repository on github is ``Scalable,
-Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM)
-Library, for Python, R, Java, Scala, C++ and
-more''~\cite{hid-sp18-401-XGBoost-Github}.
+But building gradient boosting models on huge datasets (that sometimes contain
+more than 500,000 observations) is computationally onerous, not so efficient.
+By the use of XGBoost, we can build heavy gradient boosting models on large
+data sets and run them fastly with better performance. ``The name xgboost,
+though, actually refers to the engineering goal to push the limit of
+computations resources for boosted tree algorithms. Which is the reason why
+many people use xgboost.'' - says Tianqi Chen, creator of XGBoost
+~\cite{hid-sp18-401-XGBoost-MLmastery}. The description of XGBoost according 
+to the software repository on github is ``Scalable, Portable and Distributed 
+Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, 
+C++ and more''~\cite{hid-sp18-401-XGBoost-Github}.
 
 
 \section{How XGBoost Model Works}
@@ -99,13 +97,13 @@ data. Regularization is a key aspect of XGBoost, that makes our model more
 robust to increased variance. In XGBoost, we use gradient descent method to
 optimize our loss function or objective function. In this method, we
 differentiate our loss function with respect to predicted output (y-hat),
-which is the gradient, and improve this 'y-hat' along the direction of
+which is the gradient, and improve this `y-hat' along the direction of
 gradient to minimize the loss function in an iterative manner.
 
 XGBoost model supports the features of scikit-learn (in python) and R
 implementations, like cross validation. fit methods etc. along with new
 additions like regularization.  Typical loss functions that one uses depend on
-the type of Machine Learning model that we are building. Some of them are :
+the type of Machine Learning model that we are building. Some of them are:
 
 \begin{itemize}
 \item Root Mean Square error for Linear Regression problems. 
@@ -113,12 +111,12 @@ the type of Machine Learning model that we are building. Some of them are :
 \item mLog loss for Multi Class Classification problems.
 \end{itemize}
 
-XGBoost optimizes its parameters by using Gradient Descent Algorithm on the loss
-function~\cite{hid-sp18-401-XGBoost-MLmastery}. Three forms of gradient
+XGBoost optimizes its parameters by using Gradient Descent Algorithm on the 
+loss function~\cite{hid-sp18-401-XGBoost-MLmastery}. Three forms of gradient
 boosting  are supported by XGBoost, which are:
 
 \begin{itemize}
-\item Gradient Boosting(regular)
+\item Gradient Boosting (regular)
 \item Stochastic Gradient Boosting
 \item Regularized Gradient Boosting 
 \end{itemize}
@@ -148,15 +146,18 @@ grid search feature to optimize the hyperparameters of the model. Next thing
 left, is to make XGBoost more scalable on distrubuted systems. It was achieved
 by building a common Allreduce runtime called Rabit and use it as a bridge to
 port to different systems and  has edge over other machine learning models
-like for example, Support Vector Machines(SVM).
-See the below figure~\ref{f:XGBoost-on-different-platforms} for more
+like for example, Support Vector Machines (SVM).
+See the below figure~\ref{s:XGBoost-on-different-platforms} for more
 understanding.
 
-\begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{images/XGBoost-on-different-platforms.png}
-  \caption{XGBoost Higgs Boson Competettion~\cite{hid-sp18-401-XGBoost-on-different-platforms-image}}
-\label{f:XGBoost-on-different-platforms}
-\end{figure}
+
+
+\begin{center}
+\includegraphics[scale=0.3]{images/XGBoost-on-different-platforms.png}
+\label{s:XGBoost-on-different-platforms}
+\end{center}
+\textbf{Figure 1: XGBoost on different platforms
+~\cite{hid-sp18-401-XGBoost-on-different-platforms-image}}
 
 \section{Interfaces}
 
@@ -244,7 +245,7 @@ These define the overall functionality of XGBoost
 
 \item[booster[default - gbtree]]
 
-You get to choose whether you want to implement tree based models(gbtree) or
+You get to choose whether you want to implement tree based models (gbtree) or
 linear  models (gblinear).
 
 \item[silent[default - 0]]
@@ -256,8 +257,8 @@ training and  look for any errors.
 \item[nthread]
 
 As we know XGBoost supports parallel processing, with this parameter we can
-specify number of threads or cores tobe used simultaneously. If we donot specify
-any value  all the cores will be used.
+specify number of threads or cores tobe used simultaneously. If we donot 
+specify any value  all the cores will be used.
 
 \end{description}
 
@@ -283,8 +284,8 @@ overfitting of our boosted model  (Higher  value implies more overfitting).
 \item[max depth[default = 6]]
 
 This is simply the maximum depth of a decision tree, same as in normal gradient
-boosting  algorithm. Also used to control overfitting. We tune this parameter by
-using cross validation.
+boosting  algorithm. Also used to control overfitting. We tune this parameter 
+by using cross validation.
 
 \item[max leaf nodes]
 
@@ -311,12 +312,12 @@ Based on the type of machine learning model we are building, regression or
 classification (binary or multi class) we specify our objective or loss
 functions as reg:linear or binary:logistic or  multi:softmax respectively.
 
-\item[eval metric[default according to objective]
+\item[eval metric[default according to objective]]
 
-This is the metric that is optimized according to the loss function while doing
-cross  validation on the train data. The default values are rmse for linear
-regression and  error  for classification. We can also use area under curve(auc)
-for classification.
+This is the metric that is optimized according to the loss function while
+doing cross  validation on the train data. The default values are rmse for
+linear regression and  error  for classification. We can also use area under
+curve (auc) for classification.
 
 \end{description}
 
@@ -348,19 +349,22 @@ computation speeds.
 The author and his team in the citation, had built their model based on single
 XGBoost instance, which achieved 11th on the leaderboard, which is more than
 impressive considering there were 1785 teams in total. They have built their
-model with decision trees of depth 6 levels, and 'binary:logitraw' as the
-objective function .Besides, giving good performance on the test data, the
+model with decision trees of depth 6 levels, and `binary:logistic' as the
+objective function. Besides, giving good performance on the test data, the
 efficiency is also very high with XGBoost. Run time of the XGBoost model is
 1/4th to that of the usual python sklearn model. We can see the comparision in
-the figure~\ref{f:XGBoost-runtime-comparision}. With some basic feature
+the figure~\ref{s:XGBoost-runtime-comparision}. With some basic feature
 engineering and minimal parameter tuning, one can achieve around 25th position
 on the leaderboard with a single XGBoost model~\cite{hid-sp18-401-XGBoost-pdf}.
 
-\begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{images/Runtime-vs-Number-of-trees.png}
-  \caption{XGBoost Higgs Boson Competettion~\cite{hid-sp18-401-XGBoost-runtime-comparision-image}}
-\label{f:XGBoost-runtime-comparision}
-\end{figure}
+
+
+\begin{center}
+\includegraphics[scale=0.35]{images/Runtime-vs-Number-of-trees.png}
+\label{s:XGBoost-runtime-comparision}
+\end{center}
+\textbf{Figure 1: XGBoost Higgs Boson Competition
+~\cite{hid-sp18-401-XGBoost-runtime-comparision-image}}
 
 \subsection{Porto Seguro's Safe Driver Prediction Challenge} 
 
