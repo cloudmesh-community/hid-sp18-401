@@ -156,21 +156,17 @@ Paper to build a model as REST service.
 
 Here are the typical image of the MNIST dataset.
 
-\begin{center}
-\includegraphics[scale=5]{images/mnist-digits-small.png}\label{s:MNIST-digits-small}
-\end{center}
-\textbf{Figure 1: Hand written numbers in MNIST Dataset
-~\cite{hid-sp18-401-MNIST-image}}
+\begin{figure}[!ht]
+        \centering\includegraphics[width=\columnwidth]
+        {images/mnist-digits-small.png}
+        \caption{Hand written numbers in MNIST Dataset}\label{s:MNIST-digits-small}
+\end{figure}
 
-\begin{center}
-\includegraphics[scale=0.25]{images/mnist-digit-big.png}\label{s:MNIST-digit}
-\end{center}
-\textbf{Figure 2: Hand written number in MNIST Dataset
-~\cite{hid-sp18-401-MNIST-single-digit-image}}
-
-
-
-
+\begin{figure}[!ht]
+        \centering\includegraphics[width=\columnwidth]
+        {images/mnist-digit-big.png}
+        \caption{Hand written number in MNIST Dataset}\label{s:MNIST-digit}
+\end{figure}
 
 \section{Singular Value Decomposition}
 
@@ -259,12 +255,11 @@ of a neural network can approximate any complex function.
 The following figure is for reference only, and is not the exact architechture
 that applies for this project
 
-\begin{center}
-\includegraphics[scale=0.25]{images/neural-network.jpeg}
-\label{s:Deep Neural Network}
-\end{center}
-\textbf{Figure 4: Deep Neural Network
-~\cite{hid-sp18-401-Neural-Network-image}}
+\begin{figure}[!ht]
+        \centering\includegraphics[width=\columnwidth]
+        {images/neural-network.jpeg}
+        \caption{Deep Neural Network}\label{s:Deep Neural Network}
+\end{figure}
 
 
 For each image in the data set only one neuron in the output will be active
@@ -301,12 +296,11 @@ negative and raw output otherwise.
 f(x)&= max(x,0)
 \end{align*}
 
-\begin{center}
-\includegraphics[scale=0.35]{images/relu-activation-function.jpeg}
-\label{s:ReLU-function}
-\end{center}
-\textbf{Figure 4: ReLU Activation Function
-~\cite{hid-sp18-401-ReLU-activation-function}}
+\begin{figure}[!ht]
+        \centering\includegraphics[width=\columnwidth]
+        {images/relu-activation-function.jpeg}
+        \caption{ReLU Activation Function}\label{s:ReLU-function}
+\end{figure}
 
 Output of ReLU function is maximum of zero and itself. Gradient of this function
 is a constant value. So ReLU function overcomes the issue of Vanishing Gradient
@@ -327,11 +321,11 @@ below.
 S(x)&=\frac{e^{x}}{1+e^{x}}
 \end{align*}
 
-\begin{center}
-\includegraphics[scale=0.35]{images/sigmoid-activation-function.jpeg}\label{s:Sigmoid-function}
-\end{center}
-\textbf{Figure 3: Sigmoid Activation Function
-~\cite{hid-sp18-401-sigmoid-activation-function}}
+\begin{figure}[!ht]
+        \centering\includegraphics[width=\columnwidth]
+        {images/sigmoid-activation-function.jpeg}
+        \caption{Sigmoid Activation Function}\label{s:Sigmoid-function}
+\end{figure}
 
 Sigmoid function has a characteristic S-shaped curve or sigmoid curve. Some of
 the function characteristics are, it is bounded, differentiable, and it is
