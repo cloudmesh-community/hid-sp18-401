@@ -1,6 +1,25 @@
 % status: 100
 % chapter: REST
 
+
+\def\paperstatus{100} % a number from 0-100 indicating your status. 100
+                % means completed
+\def\paperchapter{REST} % This section is typically a single keyword. from
+                   % a small list. Consult with theinstructors about
+                   % yours. They typically fill it out once your first
+                   % text has been reviewed.
+\def\hid{hid-sp18-401,hid-sp18-421} % all hids of the authors of this
+                                % paper. The paper must only be in one
+                                % authors directory and all other
+                                % authors contribute to it in that
+                                % directory. That authors hid must be
+                                % listed first
+\def\volume{9} % the volume of the proceedings in which this paper is to
+           % be included
+
+\def\locator{\hid, Volume: \volume, Chapter: \paperchapter, Status:
+  \paperstatus. \newline}
+
 \title{REST Service Framework for Singular Value Decomposition on MNIST Image Classification Problem}
 
 
@@ -40,7 +59,7 @@ Model and singular value decomposition is done in  python using Tensorflow.
 
  \end{abstract}
 
-\keywords{hid-sp18-401,hid-sp18-421, Singular Value Decomposition, Swagger,
+\keywords{\locator Singular Value Decomposition, Swagger,
 Docker, Deep Learning, Neural Networks, Tensorflow}
 
 
